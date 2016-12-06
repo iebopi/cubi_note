@@ -1,0 +1,11 @@
+u-boot-sunxi/Makefile
+u-boot-sunxi/boards.cfg
+
+u-boot-sunxi/include/configs/sun7i.h
+u-boot-sunxi/include/configs/sunxi-common.h
+u-boot-sunxi/common/spl/Makefile
+
+u-boot-sunxi/arch/arm/cpu/armv7/sunxi (secondary_init.S)
+u-boot-sunxi/arch/arm/cpu/armv7/ (start.S; lowlevel_init.S)
+
+u-boot-sunxi/arch/arm/include/asm

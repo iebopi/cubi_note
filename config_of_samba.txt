@@ -1,0 +1,26 @@
+一、Ubuntu 配置
+0.安装samba  | http://jingyan.baidu.com/article/00a07f38b9194082d028dc08.html
+1.添加samba用户
+  sudo pdbedit -a youname
+2.添加共享文件
+  配置config   sudo vim /etc/samba/smb.conf
+  修改smb.conf,在global中添加security = user
+  修改smb.conf,添加共享文件下配置信息，例如：
+--------------------------------
+  [myshare]
+  comment = share by
+  path = $dir（共享路径）
+  browseable = yes
+  public = no
+  valid = your name
+  writable = yes（或no）
+---------------------------------
+3.重启samba
+  sudo /etc/init.d/smbd restart
+
+二、Windows 配置
+1.Windows下访问Ubuntu共享文件夹
+   映射或者运行\\192.168.1.10\myshare (与smb.conf中[myshare]一致)
+2.切换samba用户
+   Windows命令行输入 net use * /d /y
+   然后重复步骤1
