@@ -12,9 +12,9 @@
 
        git remote set-url origin git@github.com:iebopi/cubi_note.git
 
-5, git push -u origin master
+5, git commit -m "notes"
 
-6, git commit -m "notes"
+6, git push -u origin master
 
 ------------------------
 7, password store: git config --global credential.helper store

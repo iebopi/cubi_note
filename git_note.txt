@@ -17,4 +17,6 @@
 6, git push -u origin master
 
 ------------------------
-7, password store: git config --global credential.helper store
+7, git pull origin master
+
+8, password store: git config --global credential.helper store
