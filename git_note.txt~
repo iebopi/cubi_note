@@ -8,7 +8,7 @@
 
 5, git push -u origin master
 
-6, git commit -m "notes"
+6, git commit -m "explain"
 
 ------------------------
 7, password store: git config --global credential.helper store
