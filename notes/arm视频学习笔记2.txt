@@ -1,0 +1,40 @@
+U-boot
+BL0(IROM) -->BL1-->（IRAM）--> BL2(内存)
+
+2440
+{程序入口、BL1、BL2}
+BL1：
+设置中断向量表
+设置处理SVC模式
+刷新I/D cache
+关闭MMU/cache
+（外设基地址初始化）
+点亮LED
+关闭看门狗
+关闭所有中断
+lowlevel init
+{初始化系统时钟
+初始化串口
+简单初始化nand flash
+初始化内存
+}
+复制nand flash中的bl到内存
+设置堆栈
+清除bss段
+
+ARM地址空间 mapping
+
+ARM启动：
+1.stepping stone（nand 4k(start.S) 拷贝到CPU并运行）
+2.拷贝nand-->cpu sram
+3.PC 从stepping stone 跳转到 sram
+
+b跳转（相对跳转）与ldr跳转（绝对跳转）的区别
+
+BL2: start_armboot
+初始化串口
+LCD初始化
+网卡初始化
+初始化LED
+执行用户输入命令（main_loop）
+

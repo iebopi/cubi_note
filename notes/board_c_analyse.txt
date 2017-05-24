@@ -1,0 +1,43 @@
+	
+	
+//5.2 Ìø×ªÖÁboard_init_f£¨arch/arm/lib/board.c£©
+	gd->mon_len = _bss_end_ofs;
+	for (init_fnc_ptr = init_sequence; *init_fnc_ptr; ++init_fnc_ptr) {
+		if ((*init_fnc_ptr)() != 0) {
+			hang ();
+		}
+	}
+	
+	init_fnc_t *init_sequence[] = {
+	arch_cpu_init,		/* basic arch cpu dependent setup */
+	mark_bootstage,
+#ifdef CONFIG_OF_CONTROL
+	fdtdec_check_fdt,
+#endif
+#if defined(CONFIG_BOARD_EARLY_INIT_F)
+	board_early_init_f,
+#endif
+	timer_init,		/* initialize timer */
+#ifdef CONFIG_BOARD_POSTCLK_INIT
+	board_postclk_init,
+#endif
+#ifdef CONFIG_FSL_ESDHC
+	get_clocks,
+#endif
+	env_init,		/* initialize environment */
+	init_baudrate,		/* initialze baudrate settings */
+	serial_init,		/* serial communications setup */
+	console_init_f,		/* stage 1 init of console */
+	display_banner,		/* say that we are here */
+#if defined(CONFIG_DISPLAY_CPUINFO)
+	print_cpuinfo,		/* display cpu info (and speed) */
+#endif
+#if defined(CONFIG_DISPLAY_BOARDINFO)
+	checkboard,		/* display board info */
+#endif
+#if defined(CONFIG_HARD_I2C) || defined(CONFIG_SYS_I2C)
+	init_func_i2c,
+#endif
+	dram_init,		/* configure available RAM banks */
+	NULL,
+};
