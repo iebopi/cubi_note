@@ -16,12 +16,12 @@
 
 6, git push -u origin master
 
-------------------------
+=====================================================================
 7, git pull origin master
 
 8, password store: git config --global credential.helper store
 
-------------------------
+=====================================================================
 test:
 
    ssh -T git@github.com
@@ -29,3 +29,9 @@ test:
    ssh -v git@github.com
 
    git remote -v
+
+
+=====================================================================
+ref:
+
+   http://blog.csdn.net/wfdtxz/article/details/8678982
