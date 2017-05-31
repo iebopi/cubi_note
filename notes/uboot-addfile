@@ -1,0 +1,8 @@
+1, 新建汇编文件 include
+#include <asm-offsets.h>
+#include <config.h>
+#include <linux/linkage.h>
+
+2, 所在文件夹makefile修改，添加依赖
+
+
