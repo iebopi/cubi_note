@@ -45,7 +45,7 @@ esac
 # 2.3 配置、编译内核
 read -p "make uImage & modules_install ?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${WORK_DIR}/linux-sunxi
 # cp arch/arm/configs/sun7i_defconfig .config
 make ARCH=arm menuconfig
@@ -64,7 +64,7 @@ cd ${ROOTFS_DIR}
 
 # 内核模块安装
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${ROOTFS_DIR}
 echo -e "\033[34m copy uimage .. \033[0m"
 cp ${WORK_DIR}/linux-sunxi/arch/arm/boot/uImage ${ROOTFS_DIR}/boot/
@@ -130,7 +130,7 @@ wpa-psk your-ap-passwd" > etc/network/interfaces
 # 7.创建系统镜像
 read -p "creat & write image?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${WORK_DIR}
 echo -e "\033[34m make image .. \033[0m"
 dd if=/dev/zero of=disk.img count=2000000
@@ -183,7 +183,7 @@ echo -e "\033[34m make image done! \033[0m"
 # 镜像写入SD卡
 read -p "write sd card?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 read -p "please type dev name(sdb/sdc/..):" Val
 CARD=/dev/$Val
 cd ${WORK_DIR}
