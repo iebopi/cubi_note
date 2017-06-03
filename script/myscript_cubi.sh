@@ -33,8 +33,8 @@ read -p "make u-boot?(y/n):" Val
 case $Val in
 y|Y|$NULL)
 cd ${WORK_DIR}/u-boot-sunxi
-make distclean CROSS_COMPILE=arm-linux-gnueabihf-
-make cubieboard2 CROSS_COMPILE=arm-linux-gnueabihf-
+make distclean CROSS_COMPILE="ccache arm-linux-gnueabihf-"
+make cubieboard2 CROSS_COMPILE="ccache arm-linux-gnueabihf-"
 ;;
 esac
 
@@ -49,7 +49,7 @@ y|Y|$NULL)
 cd ${WORK_DIR}/linux-sunxi
 # cp arch/arm/configs/sun7i_defconfig .config
 make ARCH=arm menuconfig
-make -j5 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage modules
+make -j5 ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabihf-" uImage modules
 ;;
 esac
 
@@ -70,7 +70,7 @@ echo -e "\033[34m copy uimage .. \033[0m"
 cp ${WORK_DIR}/linux-sunxi/arch/arm/boot/uImage ${ROOTFS_DIR}/boot/
 echo -e "\033[34m kernel modules_install .. \033[0m"
 make -C ${WORK_DIR}/linux-sunxi INSTALL_MOD_PATH=${ROOTFS_DIR} ARCH=arm \
-CROSS_COMPILE=arm-linux-gnueabihf- modules_install
+CROSS_COMPILE="ccache arm-linux-gnueabihf-" modules_install
 ;;
 esac
 

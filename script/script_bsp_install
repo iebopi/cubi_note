@@ -37,6 +37,7 @@ apt-get update deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse
 apt-get install -y openjdk-6-jdk
 apt-get install -y xsltproc
 apt-get install -y picocom
+apt-get install -y ccache
 
 
 sudo apt-get install -y ia32-libs
