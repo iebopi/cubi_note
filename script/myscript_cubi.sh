@@ -29,7 +29,7 @@ ROOTFS_DIR=${WORK_DIR}/chroot-armhf
 
 # 2 编译组件
 # 2.1编译U-BOOT
-read -p "make u-boot?(y/n):" Val
+read -p "make u-boot?(Y/n):" Val
 case $Val in
 y|Y|$NULL)
 cd ${WORK_DIR}/u-boot-sunxi
@@ -43,7 +43,7 @@ esac
 # make
 
 # 2.3 配置、编译内核
-read -p "make uImage & modules_install ?(y/n):" Val
+read -p "make uImage & modules_install ?(Y/n):" Val
 case $Val in
 y|Y|$NULL)
 cd ${WORK_DIR}/linux-sunxi
@@ -128,7 +128,7 @@ wpa-ssid your-ap-ssid
 wpa-psk your-ap-passwd" > etc/network/interfaces
 
 # 7.创建系统镜像
-read -p "creat & write image?(y/n):" Val
+read -p "creat & write image?(Y/n):" Val
 case $Val in
 y|Y|$NULL)
 cd ${WORK_DIR}
@@ -181,7 +181,7 @@ esac
 echo -e "\033[34m make image done! \033[0m"
 
 # 镜像写入SD卡
-read -p "write sd card?(y/n):" Val
+read -p "write sd card?(Y/n):" Val
 case $Val in
 y|Y|$NULL)
 read -p "please type dev name(sdb/sdc/..):" Val
