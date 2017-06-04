@@ -50,3 +50,19 @@ sudo apt-get install -y gcc-arm-linux-gnueabihf cpp-arm-linux-gnueabihf
 sudo apt-get install -y libusb-1.0-0 libusb-1.0-0-dev
 sudo apt-get install -y git wget fakeroot kernel-package zlib1g-dev libncurses5-dev
 
+#修改默认gcc为gcc-4.8
+sudo apt-get install gcc-4.8
+sudo apt-get install gcc-4.8-arm-linux-gnueabihf
+sudo apt-get install gcc-4.8-arm-linux-gnueabi
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100
+sudo update-alternatives --config gcc
+sudo update-alternatives --install /usr/bin/arm-linux-gnueabihf-gcc arm-linux-gnueabihf-gcc /usr/bin/arm-linux-gnueabihf-gcc-4.8 100
+sudo update-alternatives --config arm-linux-gnueabihf-gcc
+sudo update-alternatives --install /usr/bin/arm-linux-gnueabihf-gcc arm-linux-gnueabihf-gcc /usr/bin/arm-linux-gnueabi-gcc-4.8 100
+sudo update-alternatives --config arm-linux-gnueabi-gcc
+ls /usr/bin/*gcc*
+gcc -v
+arm-linux-gnueabihf-gcc -v
+arm-linux-gnueabi-gcc -v
+
+
