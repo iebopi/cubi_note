@@ -1,13 +1,14 @@
-#include <asm-offsets.h>
-#include <config.h>
-#include <linux/linkage.h>
+//#include <asm-offsets.h>
+//#include <config.h>
+//#include <linux/linkage.h>
 
 /* led define */
 #define SUNXI_PIO_BASE          0x01C20800
 #define SUNXI_PIO_PH_CFG2_BASE  (SUNXI_PIO_BASE + 0x28)
 #define SUNXI_PIO_PH_DAT_BASE   (SUNXI_PIO_BASE + 0x34)
 
-ENTRY(led0_test)
+.globl led0_test
+led0_test:
     ldr r0, =SUNXI_PIO_PH_CFG2_BASE
     /* before write, read the reg value into r1*/
     ldr r1, [r0]
@@ -31,13 +32,12 @@ ENTRY(led0_test)
     /* set PH.21(blue led on) */
     orr r1, r1, #(1 << 11)
     str r1, [r0]
-
-
     bx  lr
-ENDPROC(led0_test)
 
 
-ENTRY(led1_test)
+
+.globl led1_test
+led1_test:
     ldr r0, =SUNXI_PIO_PH_CFG2_BASE
     /* before write, read the reg value into r1*/
     ldr r1, [r0]
@@ -61,7 +61,5 @@ ENTRY(led1_test)
     /* set PH.20(green led on) */
     orr r1, r1, #(1 << 10)
     str r1, [r0]
-
-
     bx  lr
-ENDPROC(led1_test)
+
