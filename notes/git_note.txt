@@ -32,6 +32,18 @@ test:
 
 
 =====================================================================
+reset & clean uncommited file:
+
+   git reset --hard
+
+   git clean -f -d
+
+   git pull
+
+=====================================================================
 ref:
 
    http://blog.csdn.net/wfdtxz/article/details/8678982
+
+   http://blog.chinaunix.net/uid-10415985-id-4142896.html
+

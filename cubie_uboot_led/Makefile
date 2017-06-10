@@ -1,7 +1,4 @@
 #
-# (C) Copyright 2012 Henrik Nordstrom <henrik@henriknordstrom.net>
-#
-# Based on some other Makefile
 # (C) Copyright 2000-2003
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 #
@@ -15,7 +12,7 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
@@ -28,45 +25,37 @@ include $(TOPDIR)/config.mk
 
 LIB	=  $(obj)lib$(SOC).o
 
-TARGETS =  $(obj).depend $(LIB)
+SOBJS	:= lowlevel_init.o
+SOBJS	+= reset.o
 
+# custom src
+
+#SSOBJS	+= led_test.o
 CCOBJS	+= led_testc.o
 
+
 COBJS	+= timer.o
-COBJS	+= dram.o
-COBJS	+= board.o
-COBJS	+= clock.o
-COBJS	+= pinmux.o
-COBJS	+= watchdog.o
-ifdef DEBUG
-COBJS	+= early_print.o
-endif
-ifdef CONFIG_BOARD_POSTCLK_INIT
-COBJS	+= postclk_init.o
-endif
-ifdef CONFIG_SYS_SECONDARY_ON
-COBJS	+= secondary_init.o
-COBJS	+= smp.o
-endif
-
-ifndef CONFIG_SPL_BUILD
-COBJS	+= key.o
 COBJS	+= cpu_info.o
-ifdef CONFIG_CMD_WATCHDOG
-COBJS	+= cmd_watchdog.o
-endif
-endif
+COBJS	+= board.o
+COBJS	+= gpio.o
+COBJS	+= key.o
+COBJS	+= fastboot.o
+COBJS	+= sparse.o
+COBJS	+= partition.o
+COBJS   += gic.o
+COBJS	+= sys_config.o
+COBJS	+= usb/usbc.o \
+           usb/usbc_dev.o \
+           usb/usbc_host.o \
+           usb/usbc_phy.o
 
-ifdef CONFIG_SPL_BUILD
-ifdef CONFIG_SPL_FEL
-TARGETS	+= $(obj)start.o
-endif
-endif
 
-SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c) $(CCOBJS:.o=.c)
-OBJS	:= $(addprefix $(obj),$(COBJS) $(COBJS-y) $(SOBJS) $(CCOBJS))
+#COBJS-$(CONFIG_XXXX)	+= xxxx.o
 
-all:	$(TARGETS)
+SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c) $(SSOBJS:.o=.S) $(CCOBJS:.o=.c)
+OBJS	:= $(addprefix $(obj),$(COBJS) $(COBJS-y) $(SOBJS) $(SSOBJS) $(CCOBJS))
+
+all:	 $(obj).depend $(LIB)
 
 $(LIB):	$(OBJS)
 	$(call cmd_link_o_target, $(OBJS))
