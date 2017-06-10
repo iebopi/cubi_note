@@ -51,8 +51,8 @@
 #include <dt-bindings/pinctrl/sun4i-a10.h>
 
 / {
-	model = "Cubietech Cubieboard2";
-	compatible = "cubietech,cubieboard2", "allwinner,sun7i-a20";
+	model = "CEIV ceivboard";
+	compatible = "CEIV,ceivboard", "allwinner,sun7i-a20";
 
 	aliases {
 		serial0 = &uart0;
@@ -65,15 +65,15 @@
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
-		pinctrl-0 = <&led_pins_cubieboard2>;
+		pinctrl-0 = <&led_pins_ceivboard>;
 
 		blue {
-			label = "cubieboard2:blue:usr";
+			label = "ceivboard:blue:usr";
 			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>;
 		};
 
 		green {
-			label = "cubieboard2:green:usr";
+			label = "ceivboard:green:usr";
 			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -159,7 +159,7 @@
 };
 
 &pio {
-	led_pins_cubieboard2: led_pins@0 {
+	led_pins_ceivboard: led_pins@0 {
 		allwinner,pins = "PH20", "PH21";
 		allwinner,function = "gpio_out";
 		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
