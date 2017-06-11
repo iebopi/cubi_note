@@ -1,2 +1,2 @@
 # cubi_note
-Note of cubiboard learning.
+Note of Linux learning.
