@@ -1,2 +1,2 @@
-# cubi_note
+# Linux_Notes
 Note of Linux learning.
