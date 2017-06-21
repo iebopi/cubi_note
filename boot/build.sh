@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BOOT_DIR=/home/hui/u-boot
+UBOOT=/home/hui/u-boot/u-boot-sunxi-with-spl.bin
 
-ROOTFS_DIR=/home/hui
+ROOTFS=/home/hui/ubuntu-base-16.04.2-base-armhf.tar.gz
 
 umount /media/hui/rootfs
 
@@ -45,16 +45,15 @@ mount -t vfat /dev/${Val}1 /media/hui/boot
 
 mount -t ext4 /dev/${Val}2 /media/hui/rootfs
 
-dd if=${BOOT_DIR}/u-boot-sunxi-with-spl.bin of=/dev/$Val bs=1k seek=8
+dd if=${UBOOT} of=/dev/$Val bs=1k seek=8
 
 mkimage -C none -A arm -T script -d boot.cmd boot.scr
 
+rm -rf /media/hui/rootfs/* /media/hui/boot/*
 
 cp boot.scr zImage sun7i-a20-cubieboard2.dtb /media/hui/boot
 
-rm /media/hui/rootfs*
-
-tar -xvf ${ROOTFS_DIR}/ubuntu-base-16.04.2-base-armhf.tar.gz -C /media/hui/rootfs
+tar -xvf ${ROOTFS} -C /media/hui/rootfs
 
 sync
 
