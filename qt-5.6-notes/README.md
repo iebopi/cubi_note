@@ -1,2 +1,3 @@
-# rootfs include QT 5.6.0  transplant
+# rootfs transplant
 
+Rootfs with QT 5.6.0 
