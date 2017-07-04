@@ -35,7 +35,7 @@ w
 
 EOF
 
-mkfs.vfat -n boot /dev/${Val}1
+mkfs.vfat -F 32 -n boot /dev/${Val}1
 
 mkfs.ext4 -L rootfs /dev/${Val}2
 

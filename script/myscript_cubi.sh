@@ -49,12 +49,12 @@ y|Y|$NULL)
 cd ${WORK_DIR}/linux-sunxi
 # cp arch/arm/configs/sun7i_defconfig .config
 make ARCH=arm menuconfig
-make -j5 ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabihf-" uImage modules
+make -j4 ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabihf-" uImage modules
 ;;
 esac
 
 # 3. 建立ROOTFS
-echo -e "\033[34m make ROOTFS .. \033[0m"
+echo -e "\033[7m make ROOTFS .. \033[0m"
 cd ${ROOTFS_DIR}
 # chroot . passwd
 
@@ -66,9 +66,9 @@ cd ${ROOTFS_DIR}
 case $Val in
 y|Y|$NULL)
 cd ${ROOTFS_DIR}
-echo -e "\033[34m copy uimage .. \033[0m"
+echo -e "\033[7m copy uimage .. \033[0m"
 cp ${WORK_DIR}/linux-sunxi/arch/arm/boot/uImage ${ROOTFS_DIR}/boot/
-echo -e "\033[34m kernel modules_install .. \033[0m"
+echo -e "\033[7m kernel modules_install .. \033[0m"
 make -C ${WORK_DIR}/linux-sunxi INSTALL_MOD_PATH=${ROOTFS_DIR} ARCH=arm \
 CROSS_COMPILE="ccache arm-linux-gnueabihf-" modules_install
 ;;
@@ -96,7 +96,7 @@ esac
 # chroot . apt-get install wireless-tools wpasupplicant firmware-ralink
 
 # 3.3 生成内核启动参数文件
-echo -e "\033[34m edit uEnv.txt .. \033[0m"
+echo -e "\033[7m edit uEnv.txt .. \033[0m"
 echo "mmcboot=fatload mmc 0 0x43000000 script.bin || fatload mmc 0 0x43000000 evb.bin; \
 fatload mmc 0 0x48000000 uImage; if fatload mmc 0 0x43100000 uInitrd; \
 then bootm 0x48000000 0x43100000; else bootm 0x48000000; fi
@@ -108,11 +108,11 @@ hdmi.audio=EDID:0 root=/dev/mmcblk0p1" > $ROOTFS_DIR/boot/uEnv.txt
 cd ${ROOTFS_DIR}
 # 默认fex
 # cp ${WORK_DIR}/sunxi-boards/sys_config/a20/cubieboard2.fex boot/script.fex
-echo -e "\033[34m fex2bin .. \033[0m"
+echo -e "\033[7m fex2bin .. \033[0m"
 ${WORK_DIR}/sunxi-tools/fex2bin boot/script.fex boot/script.bin
 
 # 3.5 设置网络
-echo -e "\033[34m set network config .. \033[0m"
+echo -e "\033[7m set network config .. \033[0m"
 echo "# interfaces(5) file used by ifup(8) and ifdown(8)
 auto lo
 iface lo inet loopback
@@ -132,7 +132,7 @@ read -p "creat & write image?(Y/n):" Val
 case $Val in
 y|Y|$NULL)
 cd ${WORK_DIR}
-echo -e "\033[34m make image .. \033[0m"
+echo -e "\033[7m make image .. \033[0m"
 dd if=/dev/zero of=disk.img count=2000000
 losetup /dev/loop0 disk.img
 dd if=/dev/zero of=/dev/loop0 bs=1k count=1024
@@ -140,7 +140,7 @@ cd ${WORK_DIR}/u-boot-sunxi
 dd if=u-boot-sunxi-with-spl.bin of=/dev/loop0 bs=1024 seek=8
 
 # 镜像文件分区
-echo -e "\033[34m fdisk start .. \033[0m"
+echo -e "\033[7m fdisk start .. \033[0m"
 fdisk /dev/loop0 << EOF
 n
 p
@@ -158,7 +158,7 @@ EOF
 
 # 写入镜像文件
 cd ${WORK_DIR}
-echo -e "\033[34m write image .. \033[0m"
+echo -e "\033[7m write image .. \033[0m"
 losetup -d /dev/loop0 && losetup /dev/loop0 disk.img
 losetup -o 1048576 /dev/loop1 /dev/loop0
 losetup -o 68157440 /dev/loop2 /dev/loop0
@@ -178,7 +178,7 @@ losetup -d /dev/loop0
 esac
 
 # 完成镜像文件制作
-echo -e "\033[34m make image done! \033[0m"
+echo -e "\033[7m make image done! \033[0m"
 
 # 镜像写入SD卡
 read -p "write sd card?(Y/n):" Val
@@ -187,11 +187,11 @@ y|Y|$NULL)
 read -p "please type dev name(sdb/sdc/..):" Val
 CARD=/dev/$Val
 cd ${WORK_DIR}
-echo -e "\033[34m start writing .. \033[0m"
+echo -e "\033[7m start writing .. \033[0m"
 dd if=disk.img of=$CARD bs=4k
-echo -e "\033[34m write sd done! \033[0m"
+echo -e "\033[7m write sd done! \033[0m"
 ;;
 esac
 
-echo -e "\033[34m Done! \033[0m"
+echo -e "\033[7m Done! \033[0m"
 

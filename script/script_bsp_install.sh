@@ -1,5 +1,14 @@
 # !/bin/bash
+read -p "apt update?" Val
+case $Val in
+Y/y)
 apt-get update
+;;
+esac
+
+read -p "bsp install?" Val
+case $Val in
+Y|y)
 apt-get install -y vim
 apt-get install -y libncurses5-dev
 apt-get install -y g++
@@ -49,6 +58,8 @@ sudo apt-get install -y binutils-arm-linux-gnueabihf gcc-arm-linux-gnueabi
 sudo apt-get install -y gcc-arm-linux-gnueabihf cpp-arm-linux-gnueabihf
 sudo apt-get install -y libusb-1.0-0 libusb-1.0-0-dev
 sudo apt-get install -y git wget fakeroot kernel-package zlib1g-dev libncurses5-dev
+;;
+esac
 
 #修改默认gcc为gcc-4.8
 read -p "ubuntu 16.04 or later?(Y/n):" Val
@@ -77,6 +88,15 @@ Y|y)
 sudo apt-get install -y ntpdate
 sudo ntpdate time.windows.com
 sudo hwclock --localtime --systohc
+;;
+esac
+
+read -p "useful tools install?" Val
+case $Val in
+Y|y)
+sudo add-apt-repository ppa:notepadqq-team/notepadqq
+sudo apt-get update
+sudo apt-get install notepadqq
 ;;
 esac
 
