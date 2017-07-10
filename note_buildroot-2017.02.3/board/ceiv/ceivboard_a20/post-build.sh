@@ -13,8 +13,11 @@ cp $BUILD_DIR/qt-4.8.7/demos/mainwindow/mainwindow $TARGET_DIR/root/
 # add startup item
 sed -i '/rcqt/d' $TARGET_DIR/etc/profile
 echo "/etc/init.d/rcqt" >> $TARGET_DIR/etc/profile
-echo "/root/mainwindow -qws" > $TARGET_DIR/etc/init.d/rcqt
+echo "/root/mainwindow -qws &" > $TARGET_DIR/etc/init.d/rcqt
 fakeroot chmod +x $TARGET_DIR/etc/init.d/rcqt
+
+# setup network dhcp
+echo "auto eth0\niface eth0 inet dhcp" >> $TARGET_DIR/etc/network/interfaces
 
 # delete getty line to auto login
 sed -i '/getty/a\::respawn:-/bin/sh' $TARGET_DIR/etc/inittab
