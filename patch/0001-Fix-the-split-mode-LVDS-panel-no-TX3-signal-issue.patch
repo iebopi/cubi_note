@@ -1,0 +1,36 @@
+From a3e1d145c7c7baa8bd729a0421acc3388ec26c3a Mon Sep 17 00:00:00 2001
+From: "Qiang.li" <qiang.li@nxp.com>
+Date: Wed, 18 May 2016 10:44:31 +0800
+Subject: [PATCH] Fix the split mode LVDS panel no TX3 signal issue.
+
+---
+ cpu/arm_cortexa8/mx6/ipu.c |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/cpu/arm_cortexa8/mx6/ipu.c b/cpu/arm_cortexa8/mx6/ipu.c
+index b28aab8..99188a5 100755
+--- a/cpu/arm_cortexa8/mx6/ipu.c
++++ b/cpu/arm_cortexa8/mx6/ipu.c
+@@ -2659,6 +2659,9 @@ void setup_lvds(unsigned int IPU, unsigned int DI)
+ #if (LVDS_PORT == 0)
+ #if (DISPLAY_IF_BPP == 24)
+ 	reg |= (1 << 5);
++#ifdef LVDS_SPLIT_MODE
++	reg |= (1 << 7);
++#endif
+ #endif
+ 
+ 	if (DI == 0)
+@@ -2678,6 +2681,9 @@ void setup_lvds(unsigned int IPU, unsigned int DI)
+ #if (LVDS_PORT == 1)
+ #if (DISPLAY_IF_BPP == 24)
+ 	reg |= (1 << 7);
++#ifdef LVDS_SPLIT_MODE
++	reg |= (1 << 5);
++#endif
+ #endif
+ 
+ 	if (DI == 0)
+-- 
+1.7.9.5
+
