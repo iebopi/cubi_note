@@ -20,9 +20,8 @@ fakeroot chmod +x $TARGET_DIR/etc/init.d/rcqt
 echo "auto eth0\niface eth0 inet static\naddress 192.168.0.4\ngateway 192.168.0.1\nnetmask 255.255.255.0\ndns-nameservers 192.168.0.1\n" >> $TARGET_DIR/etc/network/interfaces
 #echo "auto eth0\niface eth0 inet dhcp" >> $TARGET_DIR/etc/network/interfaces
 
-# add nameserver, del soft-link & create new
-rm $TARGET_DIR/etc/resolv.conf
-echo "nameserver 192.168.0.1" > $TARGET_DIR/etc/resolv.conf
+# add nameserver
+echo "nameserver 192.168.0.1" > $TARGET_DIR/tmp/resolv.conf
 
 
 # delete getty line to auto login
