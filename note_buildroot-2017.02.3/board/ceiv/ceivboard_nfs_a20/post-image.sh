@@ -7,7 +7,7 @@ GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
 rm -rf "${GENIMAGE_TMP}"
 
 # cp nfs to responding dir
-#cp -r ${TARGET_DIR} ${TARGET_DIR}/../../../nfs
+cp -rf ${TARGET_DIR} ${TARGET_DIR}/../../../nfs
 
 genimage                           \
 	--rootpath "${TARGET_DIR}"     \

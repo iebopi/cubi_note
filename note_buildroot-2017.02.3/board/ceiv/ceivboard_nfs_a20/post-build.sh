@@ -16,8 +16,14 @@ echo "/etc/init.d/rcqt" >> $TARGET_DIR/etc/profile
 echo "/root/mainwindow -qws &" > $TARGET_DIR/etc/init.d/rcqt
 fakeroot chmod +x $TARGET_DIR/etc/init.d/rcqt
 
-# setup network dhcp
-echo "auto eth0\niface eth0 inet dhcp" >> $TARGET_DIR/etc/network/interfaces
+# setup ipaddr static
+echo "auto eth0\niface eth0 inet static\naddress 192.168.0.4\ngateway 192.168.0.1\nnetmask 255.255.255.0\ndns-nameservers 192.168.0.1\n" >> $TARGET_DIR/etc/network/interfaces
+#echo "auto eth0\niface eth0 inet dhcp" >> $TARGET_DIR/etc/network/interfaces
+
+# add nameserver, del soft-link & create new
+rm $TARGET_DIR/etc/resolv.conf
+echo "nameserver 192.168.0.1" > $TARGET_DIR/etc/resolv.conf
+
 
 # delete getty line to auto login
 sed -i '/getty/a\::respawn:-/bin/sh' $TARGET_DIR/etc/inittab
