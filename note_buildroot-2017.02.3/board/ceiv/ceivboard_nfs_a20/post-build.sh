@@ -21,7 +21,8 @@ echo "auto eth0\niface eth0 inet static\naddress 192.168.0.4\ngateway 192.168.0.
 #echo "auto eth0\niface eth0 inet dhcp" >> $TARGET_DIR/etc/network/interfaces
 
 # add nameserver
-echo "nameserver 192.168.0.1" > $TARGET_DIR/tmp/resolv.conf
+rm $TARGET_DIR/etc/resolv.conf
+echo "nameserver 192.168.0.1" > $TARGET_DIR/etc/resolv.conf
 
 
 # delete getty line to auto login
