@@ -1,0 +1,79 @@
+--- linux-4.6/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts	2017-08-10 10:26:28.771076000 +0800
++++ linux-4.6/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts.old	2016-05-16 06:43:13.000000000 +0800
+@@ -69,21 +69,14 @@
+ 
+ 		blue {
+ 			label = "cubieboard2:blue:usr";
+-			gpios = <&pio 1 11 GPIO_ACTIVE_LOW>;
++			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>;
+ 		};
+ 
+ 		green {
+ 			label = "cubieboard2:green:usr";
+-			gpios = <&pio 1 10 GPIO_ACTIVE_LOW>;
++			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>;
+ 		};
+ 	};
+-
+-	mmc2_pwrseq: pwrseq {
+-		pinctrl-0 = <&mmc2_pins_nrst>;
+-		pinctrl-names = "default";
+-		compatible "mmc-pwrseq-emmc";
+-		reset-gpios = <pio 2 16 GPIO_ACTIVE_LOW>;
+-	};
+ };
+ 
+ &ahci {
+@@ -153,31 +146,6 @@
+ 	status = "okay";
+ };
+ 
+-&mmc2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc2_pins_a>;
+-	vmmc-supply = <&reg_vcc3v3>;
+-	bus-width = <4>;
+-	non-removable;
+-	no-1-8-v;
+-	mmc-pwrseq = <&mmc2_pwrseq>;
+-	status = "okay";
+-
+-	emmc: emmc@0 {
+-		reg = <0>;
+-		compatible = "mmc-card";
+-		broken-hpi;
+-	};
+-};
+-
+-&mmc3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc3_pins_a>;
+-	vmmc-supply = <&reg_vcc3v3>;
+-	bus-width = <4>;
+-	status = "okay";
+-};
+-
+ &ohci0 {
+ 	status = "okay";
+ };
+@@ -192,7 +160,7 @@
+ 
+ &pio {
+ 	led_pins_cubieboard2: led_pins@0 {
+-		allwinner,pins = "PB10", "PB11";
++		allwinner,pins = "PH20", "PH21";
+ 		allwinner,function = "gpio_out";
+ 		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
+ 		allwinner,pull = <SUN4I_PINCTRL_NO_PULL>;
+@@ -204,11 +172,6 @@
+ 		allwinner,drive = <SUN4I_PINCTRL_10_MA>;
+ 		allwinner,pull = <SUN4I_PINCTRL_PULL_UP>;
+ 	};
+-
+-	mmc2_pins_nrst: mmc2-rst-pin {
+-		pins = "PC16";
+-		function = "gpio_out";
+-	};
+ };
+ 
+ &reg_ahci_5v {

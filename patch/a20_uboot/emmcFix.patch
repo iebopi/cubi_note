@@ -1,0 +1,47 @@
+commit 9fa5bf30e95ead17eb0c50375b305fb8615427a9
+Author: root <aneox.inbox@gmail.com>
+Date:   Sat Nov 5 04:41:30 2016 +0600
+ 
+    allow to boot A20 from eMMC, fix
+ 
+diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+index 6953acc..87cf964 100644
+--- a/drivers/mmc/sunxi_mmc.c
++++ b/drivers/mmc/sunxi_mmc.c
+@@ -293,11 +293,17 @@ static int mmc_trans_data_by_cpu(struct mmc *mmc, struct mmc_data *data)
+ }
+  
+ static int mmc_rint_wait(struct mmc *mmc, unsigned int timeout_msecs,
+-            unsigned int done_bit, const char *what)
++            unsigned int done_bit, const char *what, struct mmc_cmd *cmd)
+ {
+    struct sunxi_mmc_host *mmchost = mmc->priv;
+    unsigned int status;
+  
++   if (cmd->cmdidx == MMC_CMD_SWITCH)
++   {
++       printf("mmc_rint_wait: fix me\n");
++       return 0;
++   }
++
+    do {
+        status = readl(&mmchost->reg->rint);
+        if (!timeout_msecs-- ||
+@@ -380,7 +386,7 @@ static int sunxi_mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+        }
+    }
+  
+-   error = mmc_rint_wait(mmc, 1000, SUNXI_MMC_RINT_COMMAND_DONE, "cmd");
++   error = mmc_rint_wait(mmc, 1000, SUNXI_MMC_RINT_COMMAND_DONE, "cmd", cmd);
+    if (error)
+        goto out;
+  
+@@ -391,7 +397,7 @@ static int sunxi_mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+                      data->blocks > 1 ?
+                      SUNXI_MMC_RINT_AUTO_COMMAND_DONE :
+                      SUNXI_MMC_RINT_DATA_OVER,
+-                     "data");
++                     "data", cmd);
+        if (error)
+            goto out;
+    }

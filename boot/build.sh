@@ -12,7 +12,7 @@ echo "Ensure As Root"
 
 read -p "Please Type dev name(sdx/mmcblkx):" Val
 
-#sudo dd if=/dev/zero of=/dev/%Val bs=1M count=2
+#sudo dd if=/dev/zero of=/dev/$Val bs=1M count=2
 
 fdisk /dev/$Val <<EOF
 d
@@ -35,15 +35,15 @@ w
 
 EOF
 
-mkfs.vfat -F 32 -n boot /dev/${Val}1
+mkfs.vfat -F 32 -n boot /dev/${Val}p1
 
-mkfs.ext4 -L rootfs /dev/${Val}2
+mkfs.ext4 -L rootfs /dev/${Val}p2
 
 mkdir /media/hui/boot /media/hui/rootfs
 
-mount -t vfat /dev/${Val}1 /media/hui/boot
+mount -t vfat /dev/${Val}p1 /media/hui/boot
 
-mount -t ext4 /dev/${Val}2 /media/hui/rootfs
+mount -t ext4 /dev/${Val}p2 /media/hui/rootfs
 
 dd if=${UBOOT} of=/dev/$Val bs=1k seek=8
 
