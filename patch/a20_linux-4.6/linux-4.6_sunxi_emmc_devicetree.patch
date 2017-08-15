@@ -1,5 +1,5 @@
---- linux-4.6/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts.old	2016-05-16 06:43:13.000000000 +0800
-+++ linux-4.6/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts	2017-08-10 10:26:28.771076000 +0800
+--- linux-4.6/arch/arm/boot/dts/bak/sun7i-a20-cubieboard2_old.dts	2016-05-16 06:43:13.000000000 +0800
++++ linux-4.6/arch/arm/boot/dts/bak/sun7i-a20-cubieboard2_emmc_another.dts	2017-08-10 10:26:28.771076000 +0800
 @@ -69,14 +69,21 @@
  
  		blue {
