@@ -1,7 +1,0 @@
---- linux-4.6/arch/arm/configs/sunxi_defconfig.old	2017-08-15 09:57:57.206763440 +0800
-+++ linux-4.6/arch/arm/configs/sunxi_defconfig	2017-08-15 09:53:37.197802608 +0800
-@@ -149,3 +149,4 @@
- CONFIG_PRINTK_TIME=y
- CONFIG_DEBUG_FS=y
- CONFIG_CRYPTO_DEV_SUN4I_SS=y
-+CONFIG_SYSVIPC=y
