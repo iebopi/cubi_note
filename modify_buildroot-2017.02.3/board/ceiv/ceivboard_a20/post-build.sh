@@ -11,10 +11,10 @@ BOOT_CMD_H=$BINARIES_DIR/boot.scr
 cp $BUILD_DIR/qt-4.8.7/demos/mainwindow/mainwindow $TARGET_DIR/root/
 
 # add startup item
-sed -i '/rcqt/d' $TARGET_DIR/etc/profile
-echo "/etc/init.d/rcqt" >> $TARGET_DIR/etc/profile
-echo "/root/mainwindow -qws &" > $TARGET_DIR/etc/init.d/rcqt
-fakeroot chmod +x $TARGET_DIR/etc/init.d/rcqt
+#sed -i '/rcqt/d' $TARGET_DIR/etc/profile
+#echo "/etc/init.d/rcqt" >> $TARGET_DIR/etc/profile
+echo "/root/mainwindow -qws &" > $TARGET_DIR/etc/init.d/S30qt
+fakeroot chmod +x $TARGET_DIR/etc/init.d/S30qt
 
 # setup network dhcp
 #echo "auto eth0\niface eth0 inet static\naddress 192.168.0.4\ngateway 192.168.0.1\nnetmask 255.255.255.0\ndns-nameservers 192.168.0.1\n" >> $TARGET_DIR/etc/network/interfaces
