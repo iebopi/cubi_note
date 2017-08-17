@@ -14,6 +14,7 @@ cp $BUILD_DIR/qt-4.8.7/demos/mainwindow/mainwindow $TARGET_DIR/root/
 #sed -i '/rcqt/d' $TARGET_DIR/etc/profile
 #echo "/etc/init.d/rcqt" >> $TARGET_DIR/etc/profile
 echo "/root/mainwindow -qws &" > $TARGET_DIR/etc/init.d/S30qt
+#echo "echo 'Programing EMMC...'\n/bin/dd if=/root/emmc.img of=/dev/mmcblk1;sync\necho 'Program EMMC DONE!!'" > $TARGET_DIR/etc/init.d/S30qt
 fakeroot chmod +x $TARGET_DIR/etc/init.d/S30qt
 
 # setup network dhcp
