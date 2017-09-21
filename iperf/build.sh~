@@ -1,5 +1,4 @@
 #!/bin/bash
-# compile iperf to stress test network
 # ref url: http://blog.csdn.net/u013625961/article/details/53892821
 
 set -e
