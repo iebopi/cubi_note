@@ -1,0 +1,4 @@
+Note:
+
+#define Debug in <uboot>/include/common.h can open debug message of uboot.
+
