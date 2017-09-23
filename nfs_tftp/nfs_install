@@ -4,7 +4,7 @@
 set -e
 
 # setup nfs dir
-NFS_DIR=/home/huhu/
+NFS_DIR=/home/
 
 sudo apt-get install -f -y nfs-kernel-server
 
