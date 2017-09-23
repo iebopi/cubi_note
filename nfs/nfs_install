@@ -1,5 +1,5 @@
 #!/bin/bash
-# install nfs server 
+# install nfs server for ubuntu desktop
 
 set -e
 

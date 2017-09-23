@@ -1,0 +1,31 @@
+#!/bin/bash
+# install tftp server for ubuntu desktop
+
+set -e
+
+# setup tftp dir
+TFTP_DIR=/home/huhu/develop/tftp
+
+# tftp-hpa is client，tftpd-hpa is server
+sudo apt-get install tftp-hpa tftpd-hpa
+
+# configure tftpd-hpa
+sudo sh -c "echo 'TFTP_USERNAME=\"tftp\" 
+TFTP_DIRECTORY=\"$TFTP_DIR\" 
+TFTP_ADDRESS=\"0.0.0.0:69\" 
+TFTP_OPTIONS=\" -l -c -s\"' > /etc/default/tftpd-hpa"
+
+# restart tftp server
+mkdir -p $TFTP_DIR
+sudo chmod 777 $TFTP_DIR
+sudo service tftpd-hpa restart
+
+ps -ef |grep tftp
+
+# tftp cmd for test
+echo -e "\ntftp test: touch a file in TFTP_DIR"
+echo -e "tftp test: tftp 127.0.0.1"
+echo -e "tftp test: get file"
+echo -e "tftp test: put file\n"
+
+echo -e "Done!\n"
