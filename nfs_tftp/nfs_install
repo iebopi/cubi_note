@@ -13,10 +13,10 @@ sudo apt-get install -f -y nfs-kernel-server
 sudo sh -c "echo '${NFS_DIR} *(rw,sync,no_root_squash,no_subtree_check)' > /etc/exports"
 
 # nfs is rpc process, port needed to mapped
-sudo service rpcbind restart
+(sudo service rpcbind restart) || (sudo /etc/init.d/portmap restart)
 
 # restart server
 sudo service nfs-kernel-server restart
 showmount -e
 
-echo "Done!"
+echo -e "Done!\n"
