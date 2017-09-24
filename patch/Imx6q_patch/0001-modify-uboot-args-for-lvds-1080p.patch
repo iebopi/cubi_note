@@ -1,0 +1,25 @@
+From a2a9101398f01814310e8a0f35628fdcb8e8a2e5 Mon Sep 17 00:00:00 2001
+From: iebopi <iezghui@126.com>
+Date: Sun, 24 Sep 2017 23:36:28 +0800
+Subject: [PATCH] modify uboot args for lvds-1080p
+
+---
+ common/cmd_menu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/cmd_menu.c b/common/cmd_menu.c
+index 054232a..2d86899 100755
+--- a/common/cmd_menu.c
++++ b/common/cmd_menu.c
+@@ -139,7 +139,7 @@ static void set_display_args(int num,char* dev, char* mode, char* rgb, int bpp)
+ }
+ static void do_set_lvds_para_1366768(void *para)
+ {
+-	set_display_args((int)(void *)para,"ldb","1366x768@60","RGB666",32);
++	set_display_args((int)(void *)para,"ldb","1366x768@60","RGB24",32);
+ }
+ 
+ static void do_set_hdmi_para_480(void *para)
+-- 
+1.9.1
+
