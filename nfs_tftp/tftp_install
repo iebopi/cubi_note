@@ -4,7 +4,7 @@
 set -e
 
 # setup tftp dir
-TFTP_DIR=/home/huhu/develop/tftp
+TFTP_DIR=/home/tftp
 
 # tftp-hpa is client，tftpd-hpa is server
 sudo apt-get install tftp-hpa tftpd-hpa
