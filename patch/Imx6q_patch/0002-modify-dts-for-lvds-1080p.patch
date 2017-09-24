@@ -1,0 +1,151 @@
+From dc8799368be42fa6de90a35bd661ae78591ab4e3 Mon Sep 17 00:00:00 2001
+From: iebopi <iezghui@126.com>
+Date: Sun, 24 Sep 2017 22:53:19 +0800
+Subject: [PATCH 2/2] modify dts for lvds-1080p
+
+---
+ arch/arm/boot/dts/e9qdl-sabresd.dtsi   | 40 +++++++++++++++++-----------------
+ arch/arm/boot/dts/imx6qdl-sabresd.dtsi | 40 +++++++++++++++++-----------------
+ 2 files changed, 40 insertions(+), 40 deletions(-)
+
+diff --git a/arch/arm/boot/dts/e9qdl-sabresd.dtsi b/arch/arm/boot/dts/e9qdl-sabresd.dtsi
+index c1f2afb..a6a35a9 100644
+--- a/arch/arm/boot/dts/e9qdl-sabresd.dtsi
++++ b/arch/arm/boot/dts/e9qdl-sabresd.dtsi
+@@ -946,44 +946,44 @@
+ 	dual-mode = <1>;
+ 	
+ 	lvds-channel@0 {
+-		fsl,data-mapping = "spwg";
+-		fsl,data-width = <18>;
++		fsl,data-mapping = "jeida"; /* spwg */
++		fsl,data-width = <24>;
+ 		status = "okay";
+ 
+ 		display-timings {
+ 			native-mode = <&timing0>;
+ 			timing0: hsd100pxn1 {
+-				clock-frequency = <65000000>;
+-				hactive = <1360>;
+-				vactive = <768>;
+-				hback-porch = <220>;
++				clock-frequency = <130000000>;
++				hactive = <1920>;
++				vactive = <1080>;
++				hback-porch = <100>;
+ 				hfront-porch = <40>;
+-				vback-porch = <21>;
+-				vfront-porch = <7>;
+-				hsync-len = <60>;
+-				vsync-len = <10>;
++				vback-porch = <30>;
++				vfront-porch = <3>;
++				hsync-len = <10>;
++				vsync-len = <2>;
+ 			};
+ 		};
+ 	};
+ 
+ 	lvds-channel@1 {
+-		fsl,data-mapping = "spwg";
+-		fsl,data-width = <18>;
++		fsl,data-mapping = "jeida";
++		fsl,data-width = <24>;
+ 		primary;
+ 		status = "okay";
+ 
+ 		display-timings {
+ 			native-mode = <&timing1>;
+ 			timing1: hsd100pxn1 {
+-				clock-frequency = <65000000>;
+-				hactive = <1024>;
+-				vactive = <768>;
+-				hback-porch = <220>;
++				clock-frequency = <130000000>;
++				hactive = <1920>;
++				vactive = <1080>;
++				hback-porch = <100>;
+ 				hfront-porch = <40>;
+-				vback-porch = <21>;
+-				vfront-porch = <7>;
+-				hsync-len = <60>;
+-				vsync-len = <10>;
++				vback-porch = <30>;
++				vfront-porch = <3>;
++				hsync-len = <10>;
++				vsync-len = <2>;
+ 			};
+ 		};
+ 	};
+diff --git a/arch/arm/boot/dts/imx6qdl-sabresd.dtsi b/arch/arm/boot/dts/imx6qdl-sabresd.dtsi
+index e9926d1..2e7106d 100644
+--- a/arch/arm/boot/dts/imx6qdl-sabresd.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-sabresd.dtsi
+@@ -946,44 +946,44 @@
+ 	dual-mode = <1>;
+ 	
+ 	lvds-channel@0 {
+-		fsl,data-mapping = "spwg";
+-		fsl,data-width = <18>;
++		fsl,data-mapping = "jeida"; /* spwg */
++		fsl,data-width = <24>;
+ 		status = "okay";
+ 
+ 		display-timings {
+ 			native-mode = <&timing0>;
+ 			timing0: hsd100pxn1 {
+-				clock-frequency = <65000000>;
+-				hactive = <1360>;
+-				vactive = <768>;
+-				hback-porch = <220>;
++				clock-frequency = <130000000>;
++				hactive = <1920>;
++				vactive = <1080>;
++				hback-porch = <100>;
+ 				hfront-porch = <40>;
+-				vback-porch = <21>;
+-				vfront-porch = <7>;
+-				hsync-len = <60>;
+-				vsync-len = <10>;
++				vback-porch = <30>;
++				vfront-porch = <3>;
++				hsync-len = <10>;
++				vsync-len = <2>;
+ 			};
+ 		};
+ 	};
+ 
+ 	lvds-channel@1 {
+-		fsl,data-mapping = "spwg";
+-		fsl,data-width = <18>;
++		fsl,data-mapping = "jeida";
++		fsl,data-width = <24>;
+ 		primary;
+ 		status = "okay";
+ 
+ 		display-timings {
+ 			native-mode = <&timing1>;
+ 			timing1: hsd100pxn1 {
+-				clock-frequency = <65000000>;
+-				hactive = <1024>;
+-				vactive = <768>;
+-				hback-porch = <220>;
++				clock-frequency = <130000000>;
++				hactive = <1920>;
++				vactive = <1080>;
++				hback-porch = <100>;
+ 				hfront-porch = <40>;
+-				vback-porch = <21>;
+-				vfront-porch = <7>;
+-				hsync-len = <60>;
+-				vsync-len = <10>;
++				vback-porch = <30>;
++				vfront-porch = <3>;
++				hsync-len = <10>;
++				vsync-len = <2>;
+ 			};
+ 		};
+ 	};
+-- 
+1.9.1
+
