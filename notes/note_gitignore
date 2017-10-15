@@ -1,0 +1,14 @@
+# QT .gitignore
+*
+!*/
+GeneratedFiles/
+Debug/
+!*.c
+!*.C
+!*.cpp
+!*.CPP
+!*.h
+!*.H
+!*.pro
+!makefile
+!Makefile
