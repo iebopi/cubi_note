@@ -20,7 +20,7 @@ tar -xvf iperf-3.0.3.tar.gz
 cd iperf-3.0.3
 ./configure
 make && make install
-ln -s /usr/local/lib/libiperf.so.0.0.0 /usr/lib/libiperf.so.0
+ln -s /usr/local/lib/libiperf.so.0.0.0 /usr/lib/libiperf.so.0 || echo "continu..."
 
 # make iperf to arm as client
 mkdir -p ${WORK_DIR}/_install 
