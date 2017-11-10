@@ -1,0 +1,15 @@
+#!/bin/bash
+i=1
+for file in *
+do
+	if test -f $file
+	then
+		echo -e "$i. \c"
+		echo "$file"
+		a[i-1]=$file
+		let "i+=1"
+	fi
+done
+
+#cp ${a[0]} testfile
+
