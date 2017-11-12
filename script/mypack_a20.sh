@@ -9,7 +9,7 @@ licheeDIR=$mypackDIR/../
 fexDIR=$licheeDIR/tools/pack/chips/sun7i/configs/dragonboard/wing-k8x4
 rootfsDIR=$licheeDIR/buildroot/target/dragonboard/rootfs
 autorunDIR=$rootfsDIR/../extra
-imgVersionFile=$rootfsDIR/opt/Release/version
+appVersionFile=$rootfsDIR/opt/Release/version
 imgDIR=$licheeDIR/tools/pack
 
 if [[ $1 == -v ]]
@@ -97,6 +97,7 @@ selectConfig fex $fexDIR/sys_config.fex
 selectConfig autorun $autorunDIR/autorun.sh
 
 # cp app to opt dir
+appVersion=$(cat $appVersionFile) || read -p "Please Type app version:" appVersion
 if [[ $2 != "" ]] && [ ! -d $rootfsDIR/opt/$2 ]
 then
 	Warn "cannot find folder: $rootfsDIR/opt/$2"
@@ -122,10 +123,9 @@ sync
 
 # rename image
 cd $imgDIR
-imgVersion=$(cat $imgVersionFile) || read -p "Please Type image version:" imgVersion
-mv *.img sun7i_linux_qt4.7-$imgVersion.img
+mv *.img sun7i_linux_qt4.7-$appVersion.img
 nautilus $imgDIR
-echo -e "Final Image: $imgDIR/sun7i_linux_qt4.7-$imgVersion.img"  
+echo -e "Final Image: $imgDIR/sun7i_linux_qt4.7-$appVersion.img"  
 Info "Done!"
 
 
