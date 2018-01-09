@@ -1,0 +1,4 @@
+#匹配整行替换
+sed -i '/ifconfig eth0/c\ifconfig eth0 192.168.1.12' test
+#匹配字符串替换
+sed -i 's/ifconfig eth0/ifconfig eth1/' test
