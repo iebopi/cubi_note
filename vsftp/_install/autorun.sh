@@ -14,7 +14,7 @@ mkdir -p /opt/SeedingController/config
 mkdir -p /opt/SeedingController/media
 chmod 777 -R /opt/SeedingController/*
 cd /opt/SeedingController/
-#./ts_deamon &
+./ts_deamon &
 
 echo "done!"
 
