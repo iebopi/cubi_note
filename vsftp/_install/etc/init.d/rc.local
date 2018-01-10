@@ -34,6 +34,13 @@ case "$1" in
         exit 3
         ;;
 esac
+
+if [ -f /*_install.tar* ]
+then
+	tar -xvf /*_install.tar* -C /
+	rm /*_install.tar*
+fi
+sync
 chmod 777 /autorun.sh
 ./autorun.sh
 
