@@ -1,0 +1,1 @@
+ifconfig eth0 $(xmllint --xpath "//Root/InIP/text()" test.xml)

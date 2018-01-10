@@ -1,0 +1,9 @@
+#!/bin/bash
+#2.sh
+#编写shell脚本获取本机的网络地址。
+#比如：本机的ip地址是：192.168.100.2/255.255.255.0，那么它的网络地址是192.168.100.1/255.255.255.0
+#注意：Bcast与前面的Ip地址之间是两个空格，所以一定要把两个空格都删掉<br>#grep后面的搜索词加不加引号都可以，如果是一个比较长，有空格的，比如inet addr，就加引号，只有Mask可以不加<br>#之所以搜索inet addr是因为，只搜索inet的话，还有IPv6的地址<br>
+IP=`ifconfig eth0 | grep 'inet addr' | sed 's/^.*addr://g' |sed 's/  Bcast:.*$//g'`
+MASK=` ifconfig eth0 | grep Mask |sed 's/^.*Mask://g'`
+echo "$IP/$MASK"
+exit
