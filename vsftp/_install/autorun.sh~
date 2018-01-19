@@ -6,8 +6,8 @@ if [[ $ipEth0 = "" ]]; then ipEth0=192.168.2.99; fi
 ifconfig eth0 $ipEth0
 ifconfig eth1 $ipEth1
 
-route add default gw ${ipEth0%.*}.1 dev eth0
-route add default gw ${ipEth1%.*}.1 dev eth1
+route add default ${ipEth0%.*}.1 dev eth0
+route add default ${ipEth1%.*}.1 dev eth1
 
 #sleep 10
 chown root:root /etc/vsftpd.conf
