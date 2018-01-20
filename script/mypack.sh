@@ -21,6 +21,7 @@ uiVersionFile=$rootfsDIR/opt/Release/UI/versionUI
 imgDIR=$licheeDIR/tools/pack
 currentDIR=$(pwd)
 ReleaseNotZip=true
+LoaderManager=/home/misterlanbing/WorkSpace/OnLine/LoaderManager/LoaderManager
 
 if [[ $1 == -v ]]
 then
@@ -29,7 +30,8 @@ then
 elif [[ $1 == /* ]] || [[ $1 == ~/* ]]
 then
 	APP=$1
-else
+elif [[ $1 != -* ]]
+then
 	APP=$(pwd)/$1
 fi
 
@@ -131,6 +133,7 @@ then
 		then
 			rm -rf $rootfsDIR/opt/Release/*
 			cp -R $currentDIR/Release $rootfsDIR/opt
+			cp $LoaderManager $rootfsDIR/opt
 		fi
 		
 		if [[ $updateVal == 2 ]] || [[ $updateVal == 3 ]]
@@ -141,14 +144,18 @@ then
 				zip -r $currentDIR/UI.zip UI/
 				mkdir -p $mypackDIR/UI
 				cp $currentDIR/UI.zip $mypackDIR/UI/UI-$uiVersion-$(date +%Y%m%d).zip
-				zip -r $currentDIR/Release.zip Release/
+				cp $LoaderManager $currentDIR/LoaderManagerUpdate
+				zip -r $currentDIR/Release.zip Release/ LoaderManagerUpdate
 				mkdir -p $mypackDIR/Release
 				cp $currentDIR/Release.zip $mypackDIR/Release/Release-$appVersion-$(date +%Y%m%d).zip
 			else
 				cd $currentDIR
-				zip -r $currentDIR/Release-$appVersion-$(date +%Y%m%d).zip Release/
+				cp $LoaderManager $currentDIR/LoaderManagerUpdate
+				zip -r $currentDIR/Release-$appVersion-$(date +%Y%m%d).zip Release/ LoaderManagerUpdate
 				mkdir -p $mypackDIR/Release/Release-$appVersion-$(date +%Y%m%d)/
+				rm -r $mypackDIR/Release/Release-$appVersion-$(date +%Y%m%d)/* || echo "continue.."
 				cp -R $currentDIR/Release* $mypackDIR/Release/Release-$appVersion-$(date +%Y%m%d)/
+				cp LoaderManagerUpdate $mypackDIR/Release/Release-$appVersion-$(date +%Y%m%d)/
 			fi
 			
 			Warn "Release.zip is generated at $mypackDIR/Release"
@@ -181,6 +188,11 @@ then
 	fi
 fi
 
+if [[ $updateVal == 1 ]] || [[ $updateVal == 3 ]]
+then
+	Warn "LoaderManager & Release has been updated to rootfs!"
+fi
+
 read -p "open mypack window?(Y/n):" Val
 if [[ $Val == Y ]] || [[ $Val == y ]]
 then
@@ -191,6 +203,15 @@ selectConfig fex $fexDIR/sys_config.fex
 
 # autorun
 selectConfig autorun $autorunDIR/autorun.sh
+
+# backlight
+read -p "Please type light value(0~255,default,100):" Val
+if [ ! $Val ]
+then
+	echo "echo 100 > /sys/devices/virtual/disp/disp/attr/lcd_bl" > $rootfsDIR/opt/UpdateLight.sh
+else
+	echo "echo $Val > /sys/devices/virtual/disp/disp/attr/lcd_bl" > $rootfsDIR/opt/UpdateLight.sh
+fi
 
 # pack
 cd $licheeDIR
