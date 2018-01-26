@@ -1,12 +1,15 @@
 #!/bin/bash
+
+set -e
+
 # 0 目录设置
-WORK_DIR=$(pwd)
+WORK_DIR=`pwd`
 ROOTFS_DIR=${WORK_DIR}/chroot-armhf
 
 # 1.1 工作软件
-#apt-get install build-essential libncurses5-dev u-boot-tools \
+#sudo apt-get install build-essential libncurses5-dev u-boot-tools \
 #qemu-user-static debootstrap git binfmt-support libusb-1.0-0-dev pkg-config
-#apt-get install gcc-arm-linux-gnueabihf
+#sudo apt-get install gcc-arm-linux-gnueabihf
 
 # 1.2 源码下载（uboot，sunxi-tools，sunxi-board，linux-sunxi）
 #cd ${WORK_DIR}
@@ -29,12 +32,12 @@ ROOTFS_DIR=${WORK_DIR}/chroot-armhf
 
 # 2 编译组件
 # 2.1编译U-BOOT
-read -p "make u-boot?(Y/n):" Val
+read -p "make u-boot?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${WORK_DIR}/u-boot-sunxi
-make distclean CROSS_COMPILE="ccache arm-linux-gnueabihf-"
-make cubieboard2 CROSS_COMPILE="ccache arm-linux-gnueabihf-"
+make distclean CROSS_COMPILE=arm-linux-gnueabihf-
+make cubieboard2 CROSS_COMPILE=arm-linux-gnueabihf-
 ;;
 esac
 
@@ -43,18 +46,19 @@ esac
 # make
 
 # 2.3 配置、编译内核
-read -p "make uImage & modules_install ?(Y/n):" Val
+read -p "make uImage & modules_install ?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${WORK_DIR}/linux-sunxi
 # cp arch/arm/configs/sun7i_defconfig .config
+# cp ../my_kernel_config .config
 make ARCH=arm menuconfig
-make -j4 ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabihf-" uImage modules
+make -j5 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage modules
 ;;
 esac
 
 # 3. 建立ROOTFS
-echo -e "\033[7m make ROOTFS .. \033[0m"
+echo -e "\033[34m make ROOTFS .. \033[0m"
 cd ${ROOTFS_DIR}
 # chroot . passwd
 
@@ -64,13 +68,13 @@ cd ${ROOTFS_DIR}
 
 # 内核模块安装
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${ROOTFS_DIR}
-echo -e "\033[7m copy uimage .. \033[0m"
+echo -e "\033[34m copy uimage .. \033[0m"
 cp ${WORK_DIR}/linux-sunxi/arch/arm/boot/uImage ${ROOTFS_DIR}/boot/
-echo -e "\033[7m kernel modules_install .. \033[0m"
+echo -e "\033[34m kernel modules_install .. \033[0m"
 make -C ${WORK_DIR}/linux-sunxi INSTALL_MOD_PATH=${ROOTFS_DIR} ARCH=arm \
-CROSS_COMPILE="ccache arm-linux-gnueabihf-" modules_install
+CROSS_COMPILE=arm-linux-gnueabihf- modules_install
 ;;
 esac
 
@@ -96,7 +100,7 @@ esac
 # chroot . apt-get install wireless-tools wpasupplicant firmware-ralink
 
 # 3.3 生成内核启动参数文件
-echo -e "\033[7m edit uEnv.txt .. \033[0m"
+echo -e "\033[34m edit uEnv.txt .. \033[0m"
 echo "mmcboot=fatload mmc 0 0x43000000 script.bin || fatload mmc 0 0x43000000 evb.bin; \
 fatload mmc 0 0x48000000 uImage; if fatload mmc 0 0x43100000 uInitrd; \
 then bootm 0x48000000 0x43100000; else bootm 0x48000000; fi
@@ -108,11 +112,11 @@ hdmi.audio=EDID:0 root=/dev/mmcblk0p1" > $ROOTFS_DIR/boot/uEnv.txt
 cd ${ROOTFS_DIR}
 # 默认fex
 # cp ${WORK_DIR}/sunxi-boards/sys_config/a20/cubieboard2.fex boot/script.fex
-echo -e "\033[7m fex2bin .. \033[0m"
+echo -e "\033[34m fex2bin .. \033[0m"
 ${WORK_DIR}/sunxi-tools/fex2bin boot/script.fex boot/script.bin
 
 # 3.5 设置网络
-echo -e "\033[7m set network config .. \033[0m"
+echo -e "\033[34m set network config .. \033[0m"
 echo "# interfaces(5) file used by ifup(8) and ifdown(8)
 auto lo
 iface lo inet loopback
@@ -128,70 +132,70 @@ wpa-ssid your-ap-ssid
 wpa-psk your-ap-passwd" > etc/network/interfaces
 
 # 7.创建系统镜像
-read -p "creat & write image?(Y/n):" Val
+read -p "creat & write image?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 cd ${WORK_DIR}
-echo -e "\033[7m make image .. \033[0m"
-dd if=/dev/zero of=disk.img count=2000000
-losetup /dev/loop0 disk.img
-dd if=/dev/zero of=/dev/loop0 bs=1k count=1024
+echo -e "\033[34m make image .. \033[0m"
+sudo dd if=/dev/zero of=disk.img count=2000000
+sudo losetup /dev/loop0 disk.img
+sudo dd if=/dev/zero of=/dev/loop0 bs=1k count=1024
 cd ${WORK_DIR}/u-boot-sunxi
-dd if=u-boot-sunxi-with-spl.bin of=/dev/loop0 bs=1024 seek=8
+sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/loop0 bs=1024 seek=8
 
 # 镜像文件分区
-echo -e "\033[7m fdisk start .. \033[0m"
-fdisk /dev/loop0 << EOF
+echo -e "\033[34m fdisk start .. \033[0m"
+sudo fdisk /dev/loop0 | echo "continue.." << EOF
 n
 p
 1
- 
+
 +64M
 n
 p
 2
- 
- 
+
+
 w
 EOF
 
 
 # 写入镜像文件
 cd ${WORK_DIR}
-echo -e "\033[7m write image .. \033[0m"
-losetup -d /dev/loop0 && losetup /dev/loop0 disk.img
-losetup -o 1048576 /dev/loop1 /dev/loop0
-losetup -o 68157440 /dev/loop2 /dev/loop0
-mkfs.vfat /dev/loop1
-mkfs.ext4 /dev/loop2
-mount /dev/loop2 /mnt
-mkdir /mnt/boot
-mount /dev/loop1 /mnt/boot
+echo -e "\033[34m write image .. \033[0m"
+sudo losetup -d /dev/loop0 && sudo losetup /dev/loop0 disk.img
+sudo losetup -o 1048576 /dev/loop1 /dev/loop0
+sudo losetup -o 68157440 /dev/loop2 /dev/loop0
+sudo mkfs.vfat /dev/loop1
+sudo mkfs.ext4 /dev/loop2
+sudo mount /dev/loop2 /mnt
+sudo mkdir /mnt/boot
+sudo mount /dev/loop1 /mnt/boot
 cd ${WORK_DIR}/chroot-armhf
-tar --exclude=qemu-arm-static -cf - . | tar -C /mnt -xvf -
-sync && umount /mnt/boot && umount /mnt
+sudo tar --exclude=qemu-arm-static -cf - . | sudo tar -C /mnt -xvf - | echo "continue.."
+sync && sudo  umount /mnt/boot && sudo umount /mnt
 
-losetup -d /dev/loop2
-losetup -d /dev/loop1
-losetup -d /dev/loop0
+sudo losetup -d /dev/loop2
+sudo losetup -d /dev/loop1
+sudo losetup -d /dev/loop0
 ;;
 esac
 
 # 完成镜像文件制作
-echo -e "\033[7m make image done! \033[0m"
+echo -e "\033[34m make image done! \033[0m"
 
 # 镜像写入SD卡
-read -p "write sd card?(Y/n):" Val
+read -p "write sd card?(y/n):" Val
 case $Val in
-y|Y|$NULL)
+y|Y)
 read -p "please type dev name(sdb/sdc/..):" Val
 CARD=/dev/$Val
 cd ${WORK_DIR}
-echo -e "\033[7m start writing .. \033[0m"
-dd if=disk.img of=$CARD bs=4k
-echo -e "\033[7m write sd done! \033[0m"
+echo -e "\033[34m start writing .. \033[0m"
+sudo dd if=disk.img of=$CARD bs=4k
+echo -e "\033[34m write sd done! \033[0m"
 ;;
 esac
 
-echo -e "\033[7m Done! \033[0m"
+echo -e "\033[34m Done! \033[0m"
 
