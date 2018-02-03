@@ -1,4 +1,4 @@
-# loading kernel & nfs from eth
+# loading kernel & nfs from network
 1. tftp server
 2. nfs server
 
