@@ -1,0 +1,64 @@
+diff --git a/vlc-android/AndroidManifest.xml b/vlc-android/AndroidManifest.xml
+index 39af279..62a36d6 100644
+--- a/vlc-android/AndroidManifest.xml
++++ b/vlc-android/AndroidManifest.xml
+@@ -30,6 +30,7 @@
+     <uses-permission android:name="android.permission.WAKE_LOCK" />
+     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+     <uses-permission android:name="android.permission.BLUETOOTH"/>
++    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+ 
+     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+     
+@@ -430,6 +431,7 @@
+             android:icon="@drawable/icon"
+             android:label="@string/app_name"
+             android:launchMode="singleTask"
++            android:screenOrientation="landscape"
+             android:windowSoftInputMode="adjustPan"
+             android:theme="@style/Theme.VLC" >
+             <meta-data android:name="android.app.searchable"
+diff --git a/vlc-android/src/org/videolan/vlc/gui/MainActivity.java b/vlc-android/src/org/videolan/vlc/gui/MainActivity.java
+index 8b67e1d..86c62fb 100644
+--- a/vlc-android/src/org/videolan/vlc/gui/MainActivity.java
++++ b/vlc-android/src/org/videolan/vlc/gui/MainActivity.java
+@@ -243,6 +243,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
+         mNavigationView.setNavigationItemSelectedListener(this);
+         if (BuildConfig.DEBUG)
+             createExtensionServiceConnection();
++        /* auto play url */
++        new MRLPanelFragment().show(getSupportFragmentManager(), "fragment_mrl");
+     }
+ 
+     @Override
+diff --git a/vlc-android/src/org/videolan/vlc/gui/network/MRLPanelFragment.java b/vlc-android/src/org/videolan/vlc/gui/network/MRLPanelFragment.java
+index d9e0a4a..a357f5c 100644
+--- a/vlc-android/src/org/videolan/vlc/gui/network/MRLPanelFragment.java
++++ b/vlc-android/src/org/videolan/vlc/gui/network/MRLPanelFragment.java
+@@ -72,6 +72,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
+     public void onStart() {
+         super.onStart();
+         updateHistory();
++        processUri();
+     }
+ 
+     @Override
+@@ -105,13 +106,14 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
+     }
+ 
+     private boolean processUri() {
+-        if (mEditText.getEditText() != null && !TextUtils.isEmpty(mEditText.getEditText().getText())) {
+-            MediaWrapper mw = new MediaWrapper(Uri.parse(mEditText.getEditText().getText().toString().trim()));
++        //if (mEditText.getEditText() != null && !TextUtils.isEmpty(mEditText.getEditText().getText())) {
++            //MediaWrapper mw = new MediaWrapper(Uri.parse(mEditText.getEditText().getText().toString().trim()));
++            MediaWrapper mw = new MediaWrapper(Uri.parse("udp://@238.0.0.1:1234"));
+             playMedia(mw);
+             mEditText.getEditText().getText().clear();
+             return true;
+-        }
+-        return false;
++        //}
++        //return false;
+     }
+ 
+     public void playMedia(MediaWrapper mw) {
