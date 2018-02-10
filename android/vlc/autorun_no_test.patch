@@ -1,0 +1,30 @@
+diff --git a/vlc-android/src/org/videolan/vlc/BootupReceiver.java b/vlc-android/src/org/videolan/vlc/BootupReceiver.java
+index a33f6f3..de9174b 100644
+--- a/vlc-android/src/org/videolan/vlc/BootupReceiver.java
++++ b/vlc-android/src/org/videolan/vlc/BootupReceiver.java
+@@ -20,6 +20,7 @@
+  *****************************************************************************/
+ package org.videolan.vlc;
+ 
++import org.videolan.vlc.gui.MainActivity;
+ import android.app.AlarmManager;
+ import android.app.PendingIntent;
+ import android.content.BroadcastReceiver;
+@@ -40,10 +41,15 @@ public class BootupReceiver extends BroadcastReceiver {
+     @Override
+     public void onReceive(Context context, Intent intent) {
+         final String action = intent.getAction();
+-        if (action != null && AndroidDevices.isAndroidTv && !AndroidUtil.isOOrLater && action.endsWith(Intent.ACTION_BOOT_COMPLETED)) {
++        if (action.equals("android.intent.action.BOOT_COMPLETED")) {
++            Intent mainActivityIntent = new Intent(context, MainActivity.class);
++            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++            context.startActivity(mainActivityIntent);
++        }
++        /*if (action != null && AndroidDevices.isAndroidTv && !AndroidUtil.isOOrLater && action.endsWith(Intent.ACTION_BOOT_COMPLETED)) {
+             if (BuildConfig.DEBUG) Log.d(TAG, "ACTION_BOOT_COMPLETED ");
+             scheduleRecommendationUpdate(context);
+-        }
++        }*/
+     }
+ 
+     private void scheduleRecommendationUpdate(Context context) {
