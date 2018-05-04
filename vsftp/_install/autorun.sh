@@ -9,14 +9,18 @@ ifconfig eth1 $ipEth1
 route add default gw ${ipEth0%.*}.1 dev eth0
 route add default gw ${ipEth1%.*}.1 dev eth1
 
-#sleep 10
-chown root:root /etc/vsftpd.conf
-mkdir -p /usr/share/empty
 passwd << EOF
 root
 root
 EOF
-vsftpd &
+
+# vsftp
+chmod 777 /autorun_vsftp.sh
+/autorun_vsftp.sh
+
+# ssh
+chmod 777 /autorun_ssh.sh
+/autorun_ssh.sh
 
 mkdir -p /opt/SeedingController/config
 mkdir -p /opt/SeedingController/media

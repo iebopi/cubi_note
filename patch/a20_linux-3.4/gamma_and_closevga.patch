@@ -1,0 +1,157 @@
+diff --git a/video/sun7i/disp/dev_disp.c b/video/sun7i/disp/dev_disp.c
+index 03e4b37..b4d4dac 100644
+--- a/video/sun7i/disp/dev_disp.c
++++ b/video/sun7i/disp/dev_disp.c
+@@ -1,6 +1,6 @@
+ #include "dev_disp.h"
+ #include <linux/device.h>
+-
++#include "../lcd/dev_lcd.h"
+ #ifdef CONFIG_HAS_EARLYSUSPEND
+ #include <linux/earlysuspend.h>
+ #include <mach/dram-freq.h>
+@@ -10,7 +10,12 @@ fb_info_t g_fbi;
+ __disp_drv_t g_disp_drv;
+ 
+ #define MY_BYTE_ALIGN(x) ( ( (x + (4*1024-1)) >> 12) << 12)             /* alloc based on 4K byte */
++extern __panel_para_t		gpanel_info[2];
++extern __lcd_panel_fun_t lcd0_cfg;
++extern __lcd_panel_fun_t lcd1_cfg;
+ 
++//extern void LCD_set_panel_funs(__lcd_panel_fun_t * lcd0_cfg, __lcd_panel_fun_t * lcd1_cfg);
++//extern __s32 lcd_init(void);
+ static unsigned int gbuffer[4096];
+ static __u32 suspend_output_type[2] = {0,0};
+ static __u32 suspend_status = 0;//0:normal; suspend_status&1 != 0:in early_suspend; suspend_status&2 != 0:in suspend;
+@@ -829,7 +834,7 @@ void disp_shutdown(struct platform_device *pdev)
+ 
+ static int disp_dram_notify(struct notifier_block *nb, unsigned long event, void *cmd)
+ {
+-    int i = 0;
++    //int i = 0;
+     //printk("disp get a dram notify:%d\n",event);
+     if (event == DRAMFREQ_NOTIFY_PREPARE){
+ #ifndef CONFIG_HAS_EARLYSUSPEND
+@@ -909,18 +914,20 @@ long disp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 	unsigned long karg[4];
+ 	unsigned long ubuffer[4] = {0};
+ 	__s32 ret = 0;
+-
+-	if (copy_from_user((void*)karg,(void __user*)arg,4*sizeof(unsigned long)))
++	printk("Enter ioctrol:################################################################\n");
++	if(cmd == DISP_CMD_SET_GAMMA_TABLE || cmd == DISP_CMD_VGA_OFF || cmd == DISP_CMD_VGA_ON);
++	else
+ 	{
+-		__wrn("copy_from_user fail\n");
+-		return -EFAULT;
++		if (copy_from_user((void*)karg,(void __user*)arg,4*sizeof(unsigned long)))
++		{
++			__wrn("copy_from_user fail\n");
++			return -EFAULT;
++		}
++		ubuffer[0] = *(unsigned long*)karg;
++		ubuffer[1] = (*(unsigned long*)(karg+1));
++		ubuffer[2] = (*(unsigned long*)(karg+2));
++		ubuffer[3] = (*(unsigned long*)(karg+3));
+ 	}
+-
+-	ubuffer[0] = *(unsigned long*)karg;
+-	ubuffer[1] = (*(unsigned long*)(karg+1));
+-	ubuffer[2] = (*(unsigned long*)(karg+2));
+-	ubuffer[3] = (*(unsigned long*)(karg+3));
+-
+         if(cmd < DISP_CMD_FB_REQUEST)
+         {
+                 if((ubuffer[0] != 0) && (ubuffer[0] != 1))
+@@ -1031,17 +1038,41 @@ long disp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+     		        break;
+ 
+     	        case DISP_CMD_SET_GAMMA_TABLE:
+-    	                if((ubuffer[1] == 0) || ((int)ubuffer[2] <= 0))
++			
++			printk("Enter gamma_table:################################################################\n");
++    	                /*if((ubuffer[1] == 0) || ((int)ubuffer[2] <= 0))
+                         {
+                                 __wrn("para invalid in disp ioctrl DISP_CMD_SET_GAMMA_TABLE,buffer:0x%x, size:0x%x\n", (unsigned int)ubuffer[1], (unsigned int)ubuffer[2]);
+                                 return -1;
+-                        }
+-    		        if(copy_from_user(gbuffer, (void __user *)ubuffer[1],ubuffer[2]))
++                        }*/
++			if(copy_from_user(gbuffer, (const void *)arg, 255*sizeof(unsigned int)))
++			{
++				__wrn("copy_from_user fail\n");
++            			return  -EFAULT;
++			
++			}
++    		        /*if(copy_from_user(gbuffer, (void __user *)ubuffer[1],ubuffer[2]))
+             		{
+             		        __wrn("copy_from_user fail\n");
+             			return  -EFAULT;
+-            		}
+-    		        ret = BSP_disp_set_gamma_table(ubuffer[0], (__u32 *)gbuffer, ubuffer[2]);
++            		}*/
++			{
++				int i = 0;
++				printk("Enter gamma_test:################################################################\n");
++				for(i = 0; i < 255; i++)
++				{
++					gpanel_info[0].lcd_gamma_tbl[i] = gbuffer[i];
++					printk("gamma_table[%d] = %d\n", i, gpanel_info[0].lcd_gamma_tbl[i]);
++				}
++				/*LCD_get_panel_funs_0(&lcd0_cfg);
++			        LCD_get_panel_funs_1(&lcd1_cfg);
++				LCD_set_panel_funs(&lcd0_cfg, &lcd1_cfg);
++				DRV_DISP_Init();
++				Fb_Init(0);*/
++				
++				//memcpy(__panel_para_t.lcd_gamma_tbl , gbuffer, 255*4);
++			}
++    		        ret = BSP_disp_set_gamma_table(0, (__u32 *)gbuffer, 1020);
+     		        break;
+ 
+     	        case DISP_CMD_GAMMA_CORRECTION_ON:
+@@ -1706,18 +1737,20 @@ long disp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 
+                 //----vga----
+                 case DISP_CMD_VGA_ON:
+-                	ret = BSP_disp_vga_open(ubuffer[0]);
++			printk("Enter VGA On:################################################################\n");
++                	ret = BSP_disp_vga_open(0);
+                         if(suspend_status != 0)
+-                        {
+-                                suspend_output_type[ubuffer[0]] = DISP_OUTPUT_TYPE_VGA;
++                        {				
++                                suspend_output_type[0] = DISP_OUTPUT_TYPE_VGA;
+                         }
+                 	break;
+ 
+                 case DISP_CMD_VGA_OFF:
+-                	ret = BSP_disp_vga_close(ubuffer[0]);
++			printk("Enter VGA Off:################################################################\n");
++                	ret = BSP_disp_vga_close(0);
+                         if(suspend_status != 0)
+-                        {
+-                                suspend_output_type[ubuffer[0]] = DISP_OUTPUT_TYPE_NONE;
++                        {	
++                                suspend_output_type[0] = DISP_OUTPUT_TYPE_NONE;
+                         }
+                 	break;
+ 
+@@ -2149,7 +2182,6 @@ static void __exit disp_module_exit(void)
+ EXPORT_SYMBOL(disp_set_hdmi_func);
+ EXPORT_SYMBOL(DRV_DISP_Init);
+ 
+-
+ module_init(disp_module_init);
+ module_exit(disp_module_exit);
+ 
+diff --git a/video/sun7i/disp/disp.mod.c b/video/sun7i/disp/disp.mod.c
+index 64c34af..2a902ae 100644
+--- a/video/sun7i/disp/disp.mod.c
++++ b/video/sun7i/disp/disp.mod.c
+@@ -135,4 +135,4 @@ __attribute__((section(".modinfo"))) =
+ "depends=";
+ 
+ 
+-MODULE_INFO(srcversion, "BE011801A62654E27A1941E");
++MODULE_INFO(srcversion, "192EB1C254B495D377A7A9F");
