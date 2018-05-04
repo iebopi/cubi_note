@@ -1,3 +1,13 @@
+From 3217bc6ac7e09309922f2e7d1a9bd2e1af98e498 Mon Sep 17 00:00:00 2001
+From: root <root@misterlanbing-virtual-machine.(none)>
+Date: Mon, 23 Apr 2018 11:26:42 +0800
+Subject: [PATCH] gamma_and_closevga
+
+---
+ video/sun7i/disp/dev_disp.c |   80 ++++++++++++++++++++++++++++++-------------
+ video/sun7i/disp/disp.mod.c |    2 +-
+ 2 files changed, 57 insertions(+), 25 deletions(-)
+
 diff --git a/video/sun7i/disp/dev_disp.c b/video/sun7i/disp/dev_disp.c
 index 03e4b37..b4d4dac 100644
 --- a/video/sun7i/disp/dev_disp.c
@@ -155,3 +165,6 @@ index 64c34af..2a902ae 100644
  
 -MODULE_INFO(srcversion, "BE011801A62654E27A1941E");
 +MODULE_INFO(srcversion, "192EB1C254B495D377A7A9F");
+-- 
+1.7.9.5
+
