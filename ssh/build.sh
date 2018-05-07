@@ -53,6 +53,6 @@ echo "Please append 'sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/
 echo "Please enable PermitRootLogin yes at /usr/local/sshd_config"
 echo "Please add root password"
 echo "exe sshd: /usr/sbin/sshd"
-echo "Done!\n"
+echo -e "Done!\n"
 sudo mv /usr/bin/pod2man_bak /usr/bin/pod2man || echo "ignore."
 
