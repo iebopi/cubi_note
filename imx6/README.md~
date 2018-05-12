@@ -1,0 +1,3 @@
+# build_disk.sh
+1. put to directory image_new to make sdcard image.
+2. if you want to add patch to rootfs, please creat a dir named patch to place patched files.

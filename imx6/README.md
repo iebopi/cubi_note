@@ -1,2 +1,3 @@
 # build_disk.sh
-put this script to directory image_new to build sdcard image.
+1. put to directory image_new to make sdcard image.
+2. creat a dir named patch to place patched files.
