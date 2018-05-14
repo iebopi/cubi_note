@@ -40,7 +40,7 @@ fi
 moreoptions=1
 node="na"
 cal_only=0
-flash_images=0
+flash_images=1
 not_partition=0
 cp_images=0
 not_format_fs=0
