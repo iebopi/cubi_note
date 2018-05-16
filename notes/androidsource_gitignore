@@ -7,6 +7,8 @@
 !*.jsp
 !*.py
 !*asm*
+!*.dtsi
+!*.dts
 
 !Makefile
 !makefile
