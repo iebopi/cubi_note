@@ -1,6 +1,6 @@
-apt-get install build-essential libncurses5-dev
-apt-get install autoconf
-apt-get install libtool
-apt-get install gettext
-apt-get install libglib2.0-dev
-apt-get install libgtk2.0-dev
+sudo apt-get install -y build-essential libncurses5-dev
+sudo apt-get install -y autoconf
+sudo apt-get install -y libtool
+sudo apt-get install -y gettext
+sudo apt-get install -y libglib2.0-dev
+sudo apt-get install -y libgtk2.0-dev
