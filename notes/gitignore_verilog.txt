@@ -1,0 +1,15 @@
+# Verilog
+
+*
+!*/
+!*.v
+!ip/*
+!hdl/*
+!*.qpf
+!*.qsf
+!*.tcl
+!*.qws
+!*.ppf
+!*.qip
+
+

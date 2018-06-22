@@ -8,7 +8,7 @@
 3. npm install gulp -g
    npm install --save-dev gulp
 
-4. electron-packager . HelloWorld --win --out ../HelloWorldApp --arch=x64 --version=0.0.1
+4. electron-packager . HelloWorld --win --out ../HelloWorldApp --arch=x64 --version=0.0.1  --overwrite --icon=./app/icon/icon.ico
 
 5. º”√‹£∫  npm install --save-dev asar -g
            «–ªªµΩresources , asar pack ./app app.asar
