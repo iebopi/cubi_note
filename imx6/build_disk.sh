@@ -5,7 +5,8 @@ version=1.0.1
 # partition size in MB
 BOOTLOAD_RESERVE=8
 BOOT_ROM_SIZE=50
-SYSTEM_ROM_SIZE=512
+PATCH_SIZE=$(du -m ./patch --max-depth=0 | awk '{print int($1)}')
+SYSTEM_ROM_SIZE=`expr 512 + ${PATCH_SIZE}`
 CACHE_SIZE=512
 RECOVERY_ROM_SIZE=8
 VENDER_SIZE=8
@@ -38,6 +39,7 @@ if [ $userid -ne "0" ]; then
 fi
 
 echo -e "version=${version}"
+echo -e "patch size: ${PATCH_SIZE}"
 
 # parse command line
 moreoptions=1
