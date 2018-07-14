@@ -188,7 +188,7 @@ copy_images
 flash_android
 
 #backup rootfs.tar
-cp ${WORK_DIR}/images/rootfs.tgz ${WORK_DIR}/
+#cp ${WORK_DIR}/images/rootfs.tgz ${WORK_DIR}/
 
 # update imx update files
 echo "update imx update files"
@@ -197,7 +197,7 @@ rm -rf ${WORK_DIR}/rootfs
 if [ -d ${WORK_DIR}/patch ]
 then
 	mkdir -p ${WORK_DIR}/rootfs
-	tar -xvf ${WORK_DIR}/images/rootfs.tgz -C ${WORK_DIR}/rootfs || exit
+	tar -xvf ${WORK_DIR}/rootfs.tgz -C ${WORK_DIR}/rootfs || exit
 	#cp ${WORK_DIR}/patch/autorun.sh ${WORK_DIR}/rootfs
 	#tar -xvf ${WORK_DIR}/patch/vsftp_install.tar -C ${WORK_DIR}/rootfs
 	#tar -xvf ${WORK_DIR}/patch/ssh_install.tar -C ${WORK_DIR}/rootfs
@@ -221,7 +221,7 @@ umount mountpoint
 rm -rf mountpoint
 
 # restore rootfs
-mv ${WORK_DIR}/rootfs.tgz ${WORK_DIR}/images/rootfs.tgz
+#mv ${WORK_DIR}/rootfs.tgz ${WORK_DIR}/images/rootfs.tgz
 
 # umount & losetup release
 sync
