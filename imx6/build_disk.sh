@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=1.0.1
+
 # partition size in MB
 BOOTLOAD_RESERVE=8
 BOOT_ROM_SIZE=50
@@ -35,6 +37,7 @@ if [ $userid -ne "0" ]; then
   exit
 fi
 
+echo -e "version=${version}"
 
 # parse command line
 moreoptions=1
@@ -66,8 +69,7 @@ fi
 # call sfdisk to create partition table
 # get total card size
 seprate=40
-total_size=`sfdisk -s ${node}`
-total_size=`expr ${total_size} / 1024`
+total_size=`expr ${SYSTEM_ROM_SIZE}`
 image_rom_sizeb=`expr ${total_size} - ${BOOT_ROM_SIZE} - ${BOOTLOAD_RESERVE}`
 image_rom_sizeb_byte=`expr ${image_rom_sizeb} \* 1024 \* 1024`
 image_rom_sizeb_byte_offset=`expr ${image_rom_sizeb_byte} + 1048576`
@@ -144,7 +146,7 @@ umount /dev/loop2
 losetup -d /dev/loop1
 losetup -d /dev/loop2
 losetup -d /dev/loop0
-dd if=/dev/zero of=imx_disk.img bs=1k count=512k
+dd if=/dev/zero of=imx_disk.img bs=1k count=`expr ${SYSTEM_ROM_SIZE} \* 1024`
 sync
 losetup /dev/loop0 imx_disk.img || exit
 
