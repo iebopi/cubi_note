@@ -1,0 +1,1 @@
+df -m | sed -n "2,3p" | awk '{print $4}'
