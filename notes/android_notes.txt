@@ -1,0 +1,27 @@
+1. ADB
+1.1 tcp mode
+    setprop service.adb.tcp.port 5555
+    stop adbd
+    start adbd
+	
+1.2 usb mode
+    setprop service.adb.tcp.port -1
+    stop adbd
+    start adbd
+	
+1.3 debug
+	adb tcpip 5555
+	adb connect 192.168.1.5:5555
+    adb -s 192.168.99.100:555 shell
+	
+1.4 others
+    adb kill-server
+    adb start-server
+	adb remount
+	adb devices
+	adb root
+	
+	setprop ro.secure 0
+	
+2. apk dump
+   aapt dump badging file.apk
