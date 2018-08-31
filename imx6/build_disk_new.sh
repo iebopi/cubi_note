@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# file list in current dir
+#   dir:  images
+#          |
+#         dir: linux4.1
+#                |
+#                file: imx6q-sabresd.dtb
+#                file: rootfs.tgz
+#                file: u-boot.imx
+#                file: zImage
+#   dir:  patch (patch file to rootfs.tgz)
+#   file: download.img
+#   file: imx6q-sabresd.dtb
+#   file: u-boot_for_download.bin
+#
+#
+#
+#
+
 version=1.0.1
 
 # partition size in MB
@@ -11,7 +29,6 @@ CACHE_SIZE=512
 RECOVERY_ROM_SIZE=8
 VENDER_SIZE=8
 MISC_SIZE=8
-IMG_NAME=imx-disk-$(date +%Y%m%d).img
 
 boot_partition=2
 images_partition=1
@@ -143,17 +160,15 @@ if [[ "${not_partition}" -eq "1" && "${flash_images}" -eq "1" ]] ; then
     exit
 fi
 
-# rm expired images file
-rm imx-disk-*.img
 # creat loop img
 umount /dev/loop1
 umount /dev/loop2
 losetup -d /dev/loop1
 losetup -d /dev/loop2
 losetup -d /dev/loop0
-dd if=/dev/zero of=${IMG_NAME} bs=1k count=`expr ${SYSTEM_ROM_SIZE} \* 1024`
+dd if=/dev/zero of=imx_disk.img bs=1k count=`expr ${SYSTEM_ROM_SIZE} \* 1024`
 sync
-losetup /dev/loop0 ${IMG_NAME} || exit
+losetup /dev/loop0 imx_disk.img || exit
 
 # destroy the partition table
 dd if=/dev/zero of=${node} bs=512 count=2
@@ -190,17 +205,17 @@ format_android
 copy_images
 flash_android
 
-#backup rootfs.tar
-#cp ${WORK_DIR}/images/rootfs.tgz ${WORK_DIR}/
-
-# update imx update files
-echo "update imx update files"
+#copy rootfs.tgz to `pwd`
+echo "copy images/linux4.1/rootfs.tgz to current dir"
+cp ${WORK_DIR}/images/linux4.1/rootfs.tgz ${WORK_DIR}/
 sync
+
+echo "make patch to rootfs.tgz"
 rm -rf ${WORK_DIR}/rootfs
 if [ -d ${WORK_DIR}/patch ]
 then
 	mkdir -p ${WORK_DIR}/rootfs
-	tar -xvf ${WORK_DIR}/rootfs.tgz -C ${WORK_DIR}/rootfs || exit
+	tar -xvf ${WORK_DIR}/rootfs.tgz -C ${WORK_DIR}/rootfs/ || exit
 	#cp ${WORK_DIR}/patch/autorun.sh ${WORK_DIR}/rootfs
 	#tar -xvf ${WORK_DIR}/patch/vsftp_install.tar -C ${WORK_DIR}/rootfs
 	#tar -xvf ${WORK_DIR}/patch/ssh_install.tar -C ${WORK_DIR}/rootfs
@@ -208,11 +223,14 @@ then
 
 	chmod 777 ${WORK_DIR}/rootfs/*.sh
 	chmod 777 ${WORK_DIR}/rootfs/etc/init.d/*
-	rm ${WORK_DIR}/images/rootfs.tgz
-	tar -zcvf ${WORK_DIR}/images/rootfs.tgz -C ${WORK_DIR}/rootfs/ .
+	rm ${WORK_DIR}/images/linux4.1/rootfs.tgz
+	cd ${WORK_DIR}/rootfs/
+	tar -zcvf ${WORK_DIR}/images/linux4.1/rootfs.tgz ./*
+	cd ${WORK_DIR}
 	sync
-	#rm -rf ${WORK_DIR}/rootfs/
+	rm -rf ${WORK_DIR}/rootfs
 fi
+
 
 # cp imx update files
 echo "copy imx update files"
