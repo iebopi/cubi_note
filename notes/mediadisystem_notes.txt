@@ -1,0 +1,100 @@
+    select device.ip, device.serial_number,
+    program.name, program.start_time, program.end_time, program.publish_time,
+    program_device.progress, program_device.success
+    from program,device,program_device
+    where program.id = program_device.program_id
+    and device.id = program_device.device_id
+    and program.status = 5;
+	
+	select device.ip, device.serial_number,
+    program.name, program.start_time, program.end_time, program.publish_time,
+    program_device.progress, program_device.success
+    from program,device,program_device
+    where program.id = program_device.program_id
+    and device.id = program_device.device_id
+    and program.status = 5
+	and program.name like "test_name_program" 
+	and date(program.publish_time) between "2018-07-11" and "2018-07-13"
+	and program_device.success like "0";
+	
+	
+    select count(distinct advertiser.name) 
+    from advertiser, item, program, program_item 
+    where program.name="test_name_program" 
+    and program.id=program_item.program_id 
+    and item.id=program_item.item_id 
+    and item.advertiser_id=advertiser.id;
+	
+	select statistic from program where name = "test_name_program";
+	
+	select statistic from program where name = "test_name_program";
+	
+    select count(distinct device.serial_number) 
+	from program, device, program_device 
+	where program.name="test_name_program" 
+	and program.id = program_device.program_id 
+	and program_device.device_id = device.id;
+	
+    select count(distinct device.serial_number) 
+    from advertiser, item, program, program_item, device, program_device 
+    where advertiser.name = "alibaba" 
+    and advertiser.id = item.advertiser_id 
+    and item.id = program_item.item_id 
+    and program.id = program_item.item_id 
+    and program.id = program_device.program_id;
+
+
+    select sum(program.statistic) 
+    from program, program_item, item, advertiser 
+    where program.id = program_item.program_id 
+    and item.id=program_item.item_id 
+    and item.advertiser_id=advertiser.id 
+    and advertiser.name="alibaba";
+	
+	select count(distinct program_item.program_id) 
+	from program_item, item, advertiser
+	where item.id = program_item.item_id
+	and advertiser.id = item.advertiser_id
+	and advertiser.name = "alibaba";
+	
+	select count(distinct program_device.program_id) 
+	from dgroup, device_group, device, program_device 
+	where dgroup.name = "group1"
+	and dgroup.id = device_group.group_id 
+	and device.id = device_group.device_id 
+	and device.id = program_device.device_id;
+	
+	
+    select sum(statistic) from program where id in 
+	(select distinct program_device.program_id
+	from dgroup, device_group, device, program_device 
+	where dgroup.name = "group1" 
+	and dgroup.id = device_group.group_id 
+	and device.id = device_group.device_id 
+	and device.id = program_device.device_id);
+	
+	
+	select count(distinct item.advertiser_id)
+	from item, program_item, program_device, device_group, dgroup 
+	where item.id = program_item.item_id
+	and program_item.program_id = program_device.program_id
+	and program_device.device_id = device_group.device_id
+	and dgroup.id = device_group.group_id 
+	and dgroup.name like "group%";
+	
+	
+	select count(distinct program_device.program_id)
+	from device, program_device
+	where device.id = program_device.device_id
+	and program_device.device_id like 1;
+	
+	select sum(statistic) from program 
+	where id in (select distinct program_id
+	from program_device
+	where device_id like 1);
+	
+	select count(distinct item.advertiser_id)
+	from item, program_item, program_device
+	where item.id = program_item.item_id
+	and program_item.program_id = program_device.program_id
+	and program_device.device_id like "1";
