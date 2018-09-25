@@ -1,0 +1,9 @@
+ubuntu_a20_update notes:
+
+1. mmc drivers (for emmc flash)
+
+2. mypack (script & config file, .../lichee/mypack)
+
+3. LoaderManager (must be updated, /home/misterlanbing/WorkSpace/OnLine/LoaderManager)
+
+4. qt (Trolltech.zip) (/opt/Trolltech)
