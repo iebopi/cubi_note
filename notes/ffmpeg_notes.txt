@@ -1,0 +1,11 @@
+﻿ffmpeg.exe -i input.mp4 -b 3500k out.ts 可以改变码率
+fmpeg -y -i <in file> -vcodec copy -acodec copy -vbsf h264_mp4toannexb <output file> 保持源码率不变
+
+
+ffmpeg -i xxx.mp4 -vcodec mpeg2video -s 1280x720 -q:v 10 -f mpegts xxx.ts
+ffmpeg -i xxx.mp4 -vcodec mpeg2video -s 1280x720 -q:v 10 -bf 0 -f mpegts xxx.ts //去掉B帧，mpeg2编码方式
+ffmpeg -i xxx.mp4 -vcodec libx264 -s 1280x720 -b:v 3000K -bf 0 -f mpegts xxx.ts //去掉B帧，H264编码方式
+
+ffmpeg -ss 00:00:00 -t 00:30:00 -accurate_seek -i 2014.ts -codec copy 2014_30min.ts //截取视频，00:00:00开始时间，00:30:00时长
+
+
