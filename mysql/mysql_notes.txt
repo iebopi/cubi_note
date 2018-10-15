@@ -1,0 +1,4 @@
+sql for privilege:
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'huihuinet.cn' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+-----------------------
