@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5-Audio-Player</title>
+    <style type="text/css">
+        .videoPlayer{
+            border: 1px solid #000;
+            width: 600px;
+        }
+        #video{
+            margin-top: 0px;
+        }
+        #videoControls{
+            width: 600px;
+            margin-top: 0px;
+        }
+        .show{
+            opacity: 1;
+        }
+        .hide{
+            opacity: 0;
+        }
+        #progressWrap{
+            background-color: black;
+            height: 25px;
+            cursor: pointer;
+        }
+        #playProgress{
+            background-color: red;
+            width: 0px;
+            height: 25px;
+            border-right: 2px solid blue;
+        }
+        #showProgress{
+            background-color: ;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="">
+    <h1>HTML5_Video_Player</h1>
+    <div class="videoPlayer" id="videoContainer">
+        <audio id="video"
+               width="600" height="360"
+               preload controls
+        >
+            <source src="file:///D:/FTP/Playa.ogg" type='video/ogg'>
+        </audio>
+        <div id="videoControls">
+            <div id="progressWrap">
+                <div id="playProgress">
+                    <!--<span id="showProgress">0</span>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(window, document){
+        // 获取要操作的元素
+        var video = document.getElementById("video");
+        var videoControls = document.getElementById("videoControls");
+        var videoContainer = document.getElementById("videoContainer");
+        var controls = document.getElementById("video_controls");
+        var progressWrap = document.getElementById("progressWrap");
+        var playProgress = document.getElementById("playProgress");
+
+        // 创建我们的操作对象，我们的所有操作都在这个对象上。
+        var videoPlayer = {
+            init: function(){
+                var that = this;
+                video.removeAttribute("controls");
+                videoPlayer.operateControls();
+            },
+            operateControls: function(){
+                bindEvent(progressWrap, "mousedown", videoSeek);
+            }
+        }
+
+        videoPlayer.init();
+
+        // 原生的JavaScript事件绑定函数
+        function bindEvent(ele, eventName, func){
+            if(window.addEventListener){
+                ele.addEventListener(eventName, func);
+            }
+            else{
+                ele.attachEvent('on' + eventName, func);
+            }
+        }
+
+        // 鼠标在播放条上点击时进行捕获并进行处理
+        function videoSeek(e){
+            if(video.paused || video.ended){
+                video.play();
+                enhanceVideoSeek(e);
+            }
+            else{
+                enhanceVideoSeek(e);
+            }
+
+        }
+        function enhanceVideoSeek(e){
+            var length = e.pageX - progressWrap.offsetLeft;
+            var percent = length / progressWrap.offsetWidth;
+            playProgress.style.width = percent * (progressWrap.offsetWidth) - 2 + "px";
+            video.currentTime = percent * video.duration;
+        }
+
+    }(this, document))
+</script>
+</body>
+</html>
