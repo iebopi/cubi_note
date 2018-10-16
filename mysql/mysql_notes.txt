@@ -1,4 +1,10 @@
-sql for privilege:
+-----------------------
+add sql privilege for all users:
+
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'huihuinet.cn' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+-----------------------
+conditional insert:
+
+insert into statistic (id,staff_id,date,status) select 16,2,"2018-09-20 21:00:11",1 from dual where exists (select * from  statistic where staff_id = (select id from staff where face_identify = "identify10011") and date >= "2018-09-19 18:00:00" and date <= "2018-09-20 20:00:00");
 -----------------------
