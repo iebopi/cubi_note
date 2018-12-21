@@ -13,14 +13,14 @@ $num = 0
 $idHWND.length
 while($num -lt $idHWND.length) 
 {
-#	Start-Sleep -Milliseconds 1000
+	Start-Sleep -Milliseconds 100
 	if($idHWND.get($num) -eq 0)
 	{
 		"continue"
 		$num = $num + 1
 		continue
 	}
-	$idHWND.get($num)
-	(New-Object -comObject Shell.Application).Windows()| where {($_.HWND -eq $idHWND.get($num)) } | foreach { $_.quit() }
+	"idHWND:" + $idHWND.get($num)
+	(New-Object -comObject Shell.Application).Windows()| where {($_.HWND -eq $idHWND.get($num)) } | foreach { Start-Sleep -Milliseconds 100;$_.quit();"killed" }
 	$num = $num + 1
 }
