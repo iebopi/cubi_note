@@ -3,7 +3,7 @@
 #sudo mkswap /2GB_1.swap
 #sudo swapon /2GB_1.swap
 
-PORT = 13306
+PORT=13306
 
 sudo yum -y remove mariadb*
 sudo yum -y install autoconf
