@@ -1,0 +1,173 @@
+[10/30/2019 16:13:13] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:13] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:13] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:13] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:13] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:13] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:13] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:13] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:16] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:16] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:16] DHCP Server terminated
+[10/30/2019 16:13:16] DHCP Server terminated
+[10/30/2019 16:13:16] DHCP Server V2.5.2.3 started as Service
+[10/30/2019 16:13:16] DHCP Server V2.5.2.3 started as Application
+[10/30/2019 16:13:16] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:16] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:16] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:16] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:16] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:16] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:16] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:16] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:16] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:16] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:21] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:21] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:21] DHCP Server terminated
+[10/30/2019 16:13:21] DHCP Server terminated
+[10/30/2019 16:13:21] DHCP Server V2.5.2.3 started as Service
+[10/30/2019 16:13:21] DHCP Server V2.5.2.3 started as Application
+[10/30/2019 16:13:21] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:21] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:21] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:21] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:21] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:21] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:21] Adapter 2 with IP address 192.168.3.212 found but not used
+[10/30/2019 16:13:21] Adapter 2 with IP address 192.168.3.212 found but not used
+[10/30/2019 16:13:21] Adapter 3 with IP address 192.168.1.212 found but not used
+[10/30/2019 16:13:21] Adapter 3 with IP address 192.168.1.212 found but not used
+[10/30/2019 16:13:21] Adapter 4 with IP address 172.16.30.212 found (pAdap=0x023abac8)
+[10/30/2019 16:13:21] Adapter 4 with IP address 172.16.30.212 found (pAdap=0x01040518)
+[10/30/2019 16:13:21] Adapter 5 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:21] Adapter 5 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:21] Adapter 6 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:21] Adapter 6 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:24] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:24] recvfrom returns with error 10038
+[10/30/2019 16:13:24] recvfrom returns with error 10038
+[10/30/2019 16:13:24] DHCP Server terminated
+[10/30/2019 16:13:24] DHCP Server terminated
+[10/30/2019 16:13:24] DHCP Server V2.5.2.3 started as Service
+[10/30/2019 16:13:24] DHCP Server V2.5.2.3 started as Application
+[10/30/2019 16:13:24] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:24] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:24] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:24] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:24] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:24] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:24] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:24] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:24] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:24] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:33] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:33] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:33] DHCP Server terminated
+[10/30/2019 16:13:33] DHCP Server terminated
+[10/30/2019 16:13:33] DHCP Server V2.5.2.3 started as Application
+[10/30/2019 16:13:33] DHCP Server V2.5.2.3 started as Service
+[10/30/2019 16:13:33] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:33] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:33] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:33] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:33] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:33] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:33] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:33] Adapter 2 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:33] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:33] Adapter 3 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:38] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:38] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:13:38] DHCP Server terminated
+[10/30/2019 16:13:38] DHCP Server terminated
+[10/30/2019 16:13:38] DHCP Server V2.5.2.3 started as Service
+[10/30/2019 16:13:38] DHCP Server V2.5.2.3 started as Application
+[10/30/2019 16:13:38] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:38] NetworkAdapter Initialization returns 0
+[10/30/2019 16:13:38] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:38] Adapter 0 with IP address 192.168.183.1 found but not used
+[10/30/2019 16:13:38] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:38] Adapter 1 with IP address 192.168.230.1 found but not used
+[10/30/2019 16:13:38] Adapter 2 with IP address 192.168.3.212 found but not used
+[10/30/2019 16:13:38] Adapter 2 with IP address 192.168.3.212 found but not used
+[10/30/2019 16:13:38] Adapter 3 with IP address 192.168.1.212 found but not used
+[10/30/2019 16:13:38] Adapter 3 with IP address 192.168.1.212 found but not used
+[10/30/2019 16:13:38] Adapter 4 with IP address 172.16.30.212 found (pAdap=0x023ab9e8)
+[10/30/2019 16:13:38] Adapter 4 with IP address 172.16.30.212 found (pAdap=0x01040518)
+[10/30/2019 16:13:38] Adapter 5 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:38] Adapter 5 with IP address 192.168.3.210 found but not used
+[10/30/2019 16:13:38] Adapter 6 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:38] Adapter 6 with IP address 192.168.1.210 found but not used
+[10/30/2019 16:13:44] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:13:44] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:13:44] DHCP message = DHCPREQUEST
+[10/30/2019 16:13:44] DHCP message = DHCPREQUEST
+[10/30/2019 16:13:44]    requested options: 1 3 6 15 28 33 51 58 59
+[10/30/2019 16:13:44]    requested options: 1 3 6 15 28 33 51 58 59
+[10/30/2019 16:13:44] Lookup client data for physical address "0C-63-FC-1C-1A-93" / client_id "0C-63-FC-1C-1A-93"
+[10/30/2019 16:13:44] Lookup client data for physical address "0C-63-FC-1C-1A-93" / client_id "0C-63-FC-1C-1A-93"
+[10/30/2019 16:13:44] Client 0C-63-FC-1C-1A-93 is configured with the IP address 172.16.30.100
+[10/30/2019 16:13:44] Client 0C-63-FC-1C-1A-93 is configured with the IP address 172.16.30.100
+[10/30/2019 16:13:45] Response: hand out the configured IP address (lease time = 86400)
+[10/30/2019 16:13:45] Response: hand out the configured IP address (lease time = 86400)
+[10/30/2019 16:13:45] Sending a broadcast response to the client
+[10/30/2019 16:13:45] Connection 0: sending top queue packet
+[10/30/2019 16:13:45] Sending a broadcast response to the client
+[10/30/2019 16:13:45] Connection 0: sending top queue packet
+[10/30/2019 16:15:20] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:15:20] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:15:20] DHCP message = DHCPINFORM
+[10/30/2019 16:15:20] DHCP message = DHCPINFORM
+[10/30/2019 16:15:20]    requested options: 1 3 6 15 31 33 43 44 46 47 121 249 252
+[10/30/2019 16:15:20]    requested options: 1 3 6 15 31 33 43 44 46 47 121 249 252
+[10/30/2019 16:15:20] Matching scope found for 172.16.30.38, index=1
+[10/30/2019 16:15:20] Matching scope found for 172.16.30.38, index=1
+[10/30/2019 16:15:20] Lookup client data for physical address "00-0D-61-9E-6C-32" / client_id "00-0D-61-9E-6C-32"
+[10/30/2019 16:15:20] Lookup client data for physical address "00-0D-61-9E-6C-32" / client_id "00-0D-61-9E-6C-32"
+[10/30/2019 16:15:20] Client 00-0D-61-9E-6C-32 is not configured
+[10/30/2019 16:15:20] Client 00-0D-61-9E-6C-32 is not configured
+[10/30/2019 16:15:20] DHCP Request ignored
+[10/30/2019 16:15:20] DHCP Request ignored
+[10/30/2019 16:18:55] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:18:55] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:18:55] DHCP message = DHCPDISCOVER
+[10/30/2019 16:18:55] DHCP message = DHCPDISCOVER
+[10/30/2019 16:18:55]    requested options: 1 3 6 15 28 33 43 44 66 67 121 141 142 143 145 146 147 148 149 150 184
+[10/30/2019 16:18:55]    requested options: 1 3 6 15 28 33 43 44 66 67 121 141 142 143 145 146 147 148 149 150 184
+[10/30/2019 16:18:55] Lookup client data for physical address "E8-68-19-66-A9-12" / client_id "E8-68-19-66-A9-12"
+[10/30/2019 16:18:55] Lookup client data for physical address "E8-68-19-66-A9-12" / client_id "E8-68-19-66-A9-12"
+[10/30/2019 16:18:55] Client E8-68-19-66-A9-12 is not configured
+[10/30/2019 16:18:55] Client E8-68-19-66-A9-12 is not configured
+[10/30/2019 16:18:55] Perform auto configuration
+[10/30/2019 16:18:55] Perform auto configuration
+[10/30/2019 16:18:55] IPPOOL_1: 172.16.30.100-200
+[10/30/2019 16:18:55] IPPOOL_1: 172.16.30.100-200
+[10/30/2019 16:18:55] Auto configuration succeeded: IP-Addr = 172.16.30.101
+[10/30/2019 16:18:55] Auto configuration succeeded: IP-Addr = 172.16.30.101
+[10/30/2019 16:18:55] Response: offer the configured IP address (lease time = 86400)
+[10/30/2019 16:18:55] Response: offer the configured IP address (lease time = 86400)
+[10/30/2019 16:18:55] Sending a broadcast response to the client
+[10/30/2019 16:18:55] Sending a broadcast response to the client
+[10/30/2019 16:18:55] Connection 0: sending top queue packet
+[10/30/2019 16:18:55] Connection 0: sending top queue packet
+[10/30/2019 16:18:55] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:18:55] Adapter 0 has recognized an incoming DHCP request
+[10/30/2019 16:18:55] DHCP message = DHCPREQUEST
+[10/30/2019 16:18:55] DHCP message = DHCPREQUEST
+[10/30/2019 16:18:55]    requested options: 1 3 6 15 28 33 43 44 66 67 121 141 142 143 145 146 147 148 149 150 184
+[10/30/2019 16:18:55]    requested options: 1 3 6 15 28 33 43 44 66 67 121 141 142 143 145 146 147 148 149 150 184
+[10/30/2019 16:18:55] Lookup client data for physical address "E8-68-19-66-A9-12" / client_id "E8-68-19-66-A9-12"
+[10/30/2019 16:18:55] Lookup client data for physical address "E8-68-19-66-A9-12" / client_id "E8-68-19-66-A9-12"
+[10/30/2019 16:18:55] Client E8-68-19-66-A9-12 is configured with the IP address 172.16.30.101
+[10/30/2019 16:18:55] Client E8-68-19-66-A9-12 is configured with the IP address 172.16.30.101
+[10/30/2019 16:18:55] Client is looking for a different DHCP server
+[10/30/2019 16:18:55] DHCP Request ignored
+[10/30/2019 16:18:55] Client is looking for a different DHCP server
+[10/30/2019 16:18:55] DHCP Request ignored
+[10/30/2019 16:19:28] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:19:28] recvfrom returns with error 10038
+[10/30/2019 16:19:28] DHCP Server terminated
+[10/30/2019 16:19:43] DHCP Server is terminating (ignore error messages that follow)
+[10/30/2019 16:19:43] recvfrom returns with error 10038
+[10/30/2019 16:19:43] DHCP Server terminated
